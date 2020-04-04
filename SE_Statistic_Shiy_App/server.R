@@ -21,10 +21,11 @@ library(nycflights13)
 flights <- nycflights13::flights
 airports <- nycflights13::airports
 airlines <- nycflights13::airlines
-weather <. nycflights13::weather
+weather <- nycflights13::weather
 planes <- nycflights13::planes
 
-# Define server logic required to draw a histogram
+
+#ShinyApp ab hier
 shinyServer(function(input, output) {
     #Tab 1 Plot Code ##########    
     #Ab hier Code fuer Tab 1 Plot
