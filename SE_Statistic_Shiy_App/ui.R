@@ -41,13 +41,14 @@ shinyUI( navbarPage("SE Statistic Shiny APP",
                     tabPanel("Markdown",
                              sidebarLayout(
                                  sidebarPanel(
-                                     
-                                 ),
+                                   selectInput('x_achse', 'x-Achse', names(iris), multiple=FALSE, selectize=TRUE),
+                                   selectInput('y_achse', 'y-Achse', names(iris), multiple=TRUE, selectize=TRUE)
+                                 ), 
                                  mainPanel(
-                                     
+                                   uiOutput("plots")
                                  )
                              )
-                             )
-
+                    )
+                             
 )#Navbar Ende´
 )#shinUi Ende
