@@ -32,22 +32,28 @@ tabPanel("Leaflet",
     
     sidebarPanel(
       
-      helpText("COVID Map"),
+      h3("Coronavirus COVID-19 Global Cases"),
       
       selectInput("t2_mapType",
                   label = "Choose a metic to display",
-                  choices = c("Confirmed Cases", "Confirmed Deaths TODO"),
+                  choices = c("Confirmed Cases", "Confirmed Deaths", "Recovered Cases"),
                   selected = "Confirmed Cases"),
 
       sliderInput("t2_date",
                   label = "Date input",
                   min = as.Date("2020-01-22"),
-                  max = as.Date("2020-04-07"),    #todo check for last entry
-                  value = as.Date("2020-04-07"),
+                  max = as.Date("2020-04-08"),    #TODO: automatically check for last entry
+                  value = as.Date("2020-04-08"),
                   timeFormat = "%d %b",
-                  animate=animationOptions(interval = 200, loop = FALSE)
-      )
-    ),
+                  animate=animationOptions(interval = 500, loop = FALSE)
+      ),
+      
+      helpText("COVID-19 Data provided by the Johns Hopkins University Center for Systems Science and Engineering (JHU CSSE)."),
+      helpText("Source:"),
+      tags$a(href="https://github.com/CSSEGISandData/COVID-19","GitHub Repository")
+
+      
+      ),
     
     mainPanel(
       leafletOutput("t2_map"))
