@@ -14,12 +14,18 @@ shinyUI( navbarPage("SE Statistic Shiny APP",
                                  
                                  sidebarPanel(
                                     #Ab hier Code fuer Sidebar
-                                     
+                                   position = "right",
+                                   sidebarPanel(h3("Inputs for plot"), 
+                                                selectInput("treat", "1. Select treatment", choices = c("without ozone"="control","with ozone"="ozone"), selected = "ozone"),
+                                                br(),
+                                                textInput("text", "4. Enter some text to be displayed", "")),
                                      
                                   ),
                                  mainPanel(
                                     #Ab hier Code fuer das Main Panel
-                                
+                                   plotlyOutput("plot"),
+                                   tableOutput("table"),
+                                   textOutput("text")
                                      
                                  )
                              )),

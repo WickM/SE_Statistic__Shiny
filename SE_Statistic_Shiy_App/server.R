@@ -16,6 +16,11 @@ renv::restore()
 library(shiny)
 library(tidyverse)
 library(nycflights13)
+library(ggplot2)
+library(plotly)
+library(geepack)
+library(dplyr)
+
 
 #Daten NewYork Flugdaten
 flights <- nycflights13::flights
@@ -24,12 +29,30 @@ airlines <- nycflights13::airlines
 weather <- nycflights13::weather
 planes <- nycflights13::planes
 
+data(sitka89)
+
 
 #ShinyApp ab hier
 shinyServer(function(input, output) {
     #Tab 1 Plot Code ##########    
     #Ab hier Code fuer Tab 1 Plot
+    output$plot <- renderPlotly(
+        ggplotly(
+            ggplot(sitka89, aes(x = time, y = size)) +
+                geom_jitter(fill = "grey",
+                            data = sitka89[sitka89$treat == input$treat,])))
     
+    
+    output$text <- renderText(input$text)
+    
+    output$table <- renderTable(sitka89 %>%
+                                    filter(treat == input$treat) %>%
+                                    summarise("Mean" = mean(size), 
+                                              "Median" = median(size),
+                                              "STDEV" = sd(size), 
+                                              "Min" = min(size),
+                                              "Max" = max(size)))
+
     #Tab 2 Leafleat ##########    
     #Ab hier Code fuer Tab 1 Plot
     
