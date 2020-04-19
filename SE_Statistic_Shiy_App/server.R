@@ -18,12 +18,8 @@ library(tidyverse)
 library(nycflights13)
 
 #Daten NewYork Flugdaten
-flights <- nycflights13::flights
-airports <- nycflights13::airports
-airlines <- nycflights13::airlines
-weather <- nycflights13::weather
-planes <- nycflights13::planes
-
+flights <-  nycflights13::flights %>%
+    dplyr::left_join(., nycflights13::weather)
 
 #ShinyApp ab hier
 shinyServer(function(input, output) {
@@ -33,26 +29,25 @@ shinyServer(function(input, output) {
     #Tab 2 Leafleat ##########    
     #Ab hier Code fuer Tab 2 Plot
     
-    #Tab 3 Markdown ##########    
+    #Tab 3 Markdown ####################################################### 
     #Ab hier Code fuer Tab 3 Plot
-    
-    observe( 
-        for(temp_y in input$y_achse) {
-            local({ 
-                y <- temp_y
-                output[[y]] <- renderPlot( 
-                    qplot(!!sym(input$x_achse), !!sym(y), data = iris)
-                )
-            }
-            )}
-    )
-    
-    output$plots <- renderUI(
-        lapply(
-            lapply(input$y_achse, plotOutput, height = "200", width = "200"),
-            div,
-            style = htmltools::css(display = "inline-block")
+    #' Markdown Teil der Shiny App 
+    #' Es sollen in der UI Grafiken und Tabelle zusammengeklickt und als Markdown Bericht exportiert werden konnen
+    #' 
+    observeEvent(input$generate_Report, {
+        rmarkdown::render('Bericht/Bericht.Rmd', 
+                        output_format = epuRate::epurate(),
+                        params = list(
+                            monat = "Mai",
+                            Airport = "EWR"
+                            )
+                        )
+        appendTab(inputId = "nav_bar", tabPanel(title = "Test",
+                                                fluidPage(
+                                                    fluidRow(
+                                                        column(8,
+                                                               shiny::includeHTML("Bericht/Bericht.html")
+                                                               ))))
         )
-    )
-    
+        }) 
 })

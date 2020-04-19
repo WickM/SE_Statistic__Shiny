@@ -1,0 +1,21 @@
+---
+title: "Statistics, Visualization and More Using 'R' "
+author: "Rudi, Florian & Manuel"
+date: "`r format(Sys.time(), '%d %B %Y')`"
+logo: "logo_gallery.png"
+output:
+  epuRate::epurate:
+    toc: FALSE
+    number_sections: FALSE
+    code_folding: "hide"
+params::
+  monat: "Mai"
+  Airport: ""
+---
+```{r include=FALSE}
+library(epuRate)
+```
+## 
+`r lorem::ipsum(paragraphs = 2)`
+
+## Übersicht

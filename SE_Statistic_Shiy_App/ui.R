@@ -7,7 +7,7 @@
 library(shiny)
 
 # Define UI for application that draws a histogram
-shinyUI( navbarPage("SE Statistic Shiny APP",
+shinyUI( navbarPage("SE Statistic Shiny APP",id = "nav_bar",
 #Tab1----#####################################################################
                         tabPanel("Plot",
                              sidebarLayout(
@@ -40,15 +40,15 @@ shinyUI( navbarPage("SE Statistic Shiny APP",
 #Tab3----#####################################################################
                     tabPanel("Markdown",
                              sidebarLayout(
-                                 sidebarPanel(
-                                   selectInput('x_achse', 'x-Achse', names(iris), multiple=FALSE, selectize=TRUE),
-                                   selectInput('y_achse', 'y-Achse', names(iris), multiple=TRUE, selectize=TRUE)
+                                 sidebarPanel(width = 4,
+                                              actionButton(inputId = "generate_Report", label = "generate Report")
+                                   
                                  ), 
                                  mainPanel(
-                                   uiOutput("plots")
+                                   
+                                 )
                                  )
                              )
-                    )
                              
 )#Navbar Ende´
 )#shinUi Ende
