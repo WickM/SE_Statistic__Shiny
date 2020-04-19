@@ -49,5 +49,20 @@ shinyServer(function(input, output) {
                                                                shiny::includeHTML("Bericht/Bericht.html")
                                                                ))))
         )
-        }) 
+        })
+    
+    table_filter <- reactive({
+        flights_filter <- flights %>% 
+            dplyr::filter(origin %in% input$airport &
+                       carrier %in% input$carrier &
+                       as.Date(time_hour, "%m %y") > input$month[1] &
+                       as.Date(time_hour, "%m %y") < input$month[2]
+            ) %>% 
+            group_by(origin, carrier) %>% 
+            summarise(avg_delay = mean(dep_delay, na.rm = TRUE))
+        return(flights_filter)
+    })
+    
+    table_filter_slow <- shiny::throttle(r = table_filter, millis = 5000)
+    output$table <- shiny::renderTable(table_filter_slow() )
 })
