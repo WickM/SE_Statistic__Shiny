@@ -15,11 +15,6 @@ renv::restore()
 #Server Library
 library(shiny)
 library(tidyverse)
-library(nycflights13)
-
-#Daten NewYork Flugdaten
-flights <-  nycflights13::flights %>%
-    dplyr::left_join(., nycflights13::weather)
 
 #ShinyApp ab hier
 shinyServer(function(input, output) {

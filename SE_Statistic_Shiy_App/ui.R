@@ -3,8 +3,18 @@
 #'date 03.04.2020
 #'UI File 
 #'Manuel Wick-Eckl & ... & ...
+options(stringsAsFactors = FALSE)
 
 library(shiny)
+library(magrittr)
+
+load("SE_Statistic_Shiy_App/data/aufb_covid_data.RData")
+
+dat_mobil_change <- dat_apple_countries %>% 
+  dplyr::mutate(date = as.Date(date)) %>% 
+  dplyr::bind_rows(., dat_google_countries, .id = "dataset") %>% 
+  dplyr::mutate(dataset = dplyr::recode(dataset, '1' = "Apple", '2' = "Google")) %>% 
+  dplyr::filter(is.na(sub_region_1) == TRUE)
 
 # Define UI for application that draws a histogram
 shinyUI( navbarPage("SE Statistic Shiny APP",id = "nav_bar",
@@ -41,7 +51,7 @@ shinyUI( navbarPage("SE Statistic Shiny APP",id = "nav_bar",
                     tabPanel("Markdown",
                              sidebarLayout(
                                  sidebarPanel(width = 4,
-                                              shiny::selectizeInput(inputId = "airport", label="Airport", multiple =TRUE, choices = unique(flights$origin), selected=  unique(flights$origin)),
+                                              shiny::selectizeInput(inputId = "t3_countries", label="Airport", multiple =TRUE, choices = unique(flights$origin), selected=  unique(flights$origin)),
                                               shiny::selectizeInput(inputId = "carrier", label="Carrier", multiple =TRUE, choices = unique(flights$carrier), selected=  unique(flights$carrier)),
                                               shiny::sliderInput(inputId = "month", label= "Month",
                                                                  min = min(as.Date(flights$time_hour)), 
