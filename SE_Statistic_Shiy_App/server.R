@@ -47,15 +47,15 @@ shinyServer(function(input, output) {
         })
     
     table_filter <- reactive({
-        flights_filter <- flights %>% 
-            dplyr::filter(origin %in% input$airport &
-                       carrier %in% input$carrier &
-                       as.Date(time_hour, "%m %y") > input$month[1] &
-                       as.Date(time_hour, "%m %y") < input$month[2]
+        dat_mobil_change_filter <- dat_mobil_change %>% 
+            dplyr::filter(name %in% input$t3_countries & 
+                              percent_change_type %in% input$t3_activity & 
+                              date > input$t3_date[1] & 
+                              date < input$t3_date[2]
             ) %>% 
-            group_by(origin, carrier) %>% 
-            summarise(avg_delay = mean(dep_delay, na.rm = TRUE))
-        return(flights_filter)
+            group_by(name, percent_change_type) %>% 
+            summarise(p_change = mean(val, na.rm = TRUE))
+        return(dat_mobil_change_filter)
     })
     
     table_filter_slow <- shiny::throttle(r = table_filter, millis = 5000)

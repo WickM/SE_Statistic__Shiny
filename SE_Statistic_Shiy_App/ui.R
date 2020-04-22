@@ -8,13 +8,14 @@ options(stringsAsFactors = FALSE)
 library(shiny)
 library(magrittr)
 
-load("SE_Statistic_Shiy_App/data/aufb_covid_data.RData")
+load("data/aufb_covid_data.RData")
 
 dat_mobil_change <- dat_apple_countries %>% 
   dplyr::mutate(date = as.Date(date)) %>% 
   dplyr::bind_rows(., dat_google_countries, .id = "dataset") %>% 
   dplyr::mutate(dataset = dplyr::recode(dataset, '1' = "Apple", '2' = "Google")) %>% 
-  dplyr::filter(is.na(sub_region_1) == TRUE)
+  dplyr::filter(is.na(sub_region_1) == TRUE) %>% 
+  dplyr::mutate(percent_change_type = stringr::str_remove(percent_change_type, "_percent_change_from_baseline"))
 
 # Define UI for application that draws a histogram
 shinyUI( navbarPage("SE Statistic Shiny APP",id = "nav_bar",
@@ -51,13 +52,12 @@ shinyUI( navbarPage("SE Statistic Shiny APP",id = "nav_bar",
                     tabPanel("Markdown",
                              sidebarLayout(
                                  sidebarPanel(width = 4,
-                                              shiny::selectizeInput(inputId = "t3_countries", label="Airport", multiple =TRUE, choices = unique(flights$origin), selected=  unique(flights$origin)),
-                                              shiny::selectizeInput(inputId = "carrier", label="Carrier", multiple =TRUE, choices = unique(flights$carrier), selected=  unique(flights$carrier)),
-                                              shiny::sliderInput(inputId = "month", label= "Month",
-                                                                 min = min(as.Date(flights$time_hour)), 
-                                                                 max = max(as.Date(flights$time_hour)),
-                                                                 value = c(min(as.Date(flights$time_hour)) ,max(as.Date(flights$time_hour))),
-                                                                 timeFormat= "%m %y"),
+                                              shiny::selectizeInput(inputId = "t3_countries", label="Countries", multiple =TRUE, choices = unique(dat_mobil_change$name), selected=  unique(dat_mobil_change$name)),
+                                              shiny::selectizeInput(inputId = "t3_activity", label="Activity Type", multiple =TRUE, choices = unique(dat_mobil_change$percent_change_type), selected=  unique(dat_mobil_change$percent_change_type)),
+                                              shiny::sliderInput(inputId = "t3_date", label= "Date",
+                                                                 min = min(dat_mobil_change$date), 
+                                                                 max = max(dat_mobil_change$date),
+                                                                 value = c(min(dat_mobil_change$date) ,max(dat_mobil_change$date))),
                                               shiny::tags$br(), shiny::tags$hr(),
                                               actionButton(inputId = "generate_Report", label = "generate Report")
                                    
