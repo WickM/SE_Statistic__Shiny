@@ -4,7 +4,18 @@
 #'UI File 
 #'Manuel Wick-Eckl & ... & ...
 
+options(stringsAsFactors = FALSE)
+
 library(shiny)
+library(magrittr)
+
+load("SE_Statistic_Shiy_App/data/aufb_covid_data.RData")
+
+dat_mobil_change <- dat_apple_countries %>% 
+  dplyr::mutate(date = as.Date(date)) %>% 
+  dplyr::bind_rows(., dat_google_countries, .id = "dataset") %>% 
+  dplyr::mutate(dataset = dplyr::recode(dataset, '1' = "Apple", '2' = "Google")) %>% 
+  dplyr::filter(is.na(sub_region_1) == TRUE)
 
 # Define UI for application that draws a histogram
 shinyUI( navbarPage("SE Statistic Shiny APP",
