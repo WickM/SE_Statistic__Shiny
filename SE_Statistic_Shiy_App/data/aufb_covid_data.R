@@ -12,20 +12,25 @@ options(stringsAsFactors = FALSE)
 
 #'Libraries:
 library(tidyverse)
+#rvest
+#xml2
 
 ###Daten----
 
 #Daten von google
 dat_google <- readr::read_csv("https://www.gstatic.com/covid19/mobility/Global_Mobility_Report.csv")
+#Google LLC "Google COVID-19 Community Mobility Reports." https://www.google.com/covid19/mobility/ Accessed: <2020-4-22>
 
 countries <- 
   xml2::read_html("https://developers.google.com/public-data/docs/canonical/countries_csv") %>% 
   rvest::html_nodes("table") %>%
   .[[1]] %>% 
   rvest::html_table()
+#Google LLC "Google Developer" https://developers.google.com/public-data/docs/canonical/countries_csv Accessed: <2020-4-22>
 
 #Daten von Apple 
 dat_apple <- readr::read_csv("https://covid19-static.cdn-apple.com/covid19-mobility-data/2006HotfixDev11/v1/en-us/applemobilitytrends-2020-04-20.csv")
+#Apple "Apple Mobility Trends Reports" https://www.apple.com/covid19/mobility Accessed: <2020-4-22>
 
 ###Aufbereitung Apple ----
 #' Apple Daten sind im wide Format
