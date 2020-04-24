@@ -7,7 +7,7 @@
 options(stringsAsFactors = FALSE)
 
 #Mit renv restore wird der zuletzt gespeicherte Snapshot geladen bzw. überprüft ob die Projekt Bibliothek aktuell ist.
-renv::restore()
+#renv::restore()
 
 #Snapshot ist notwendig wenn librarys hinzugefügt wurden damit wir alle genau dioe gleichen verwendne 
 #renv::snapshot()
@@ -21,8 +21,6 @@ library(plotly)
 library(geepack)
 library(dplyr)
 library(readxl)
-library('MASS')
-data(mtcars)
 
 #Daten NewYork Flugdaten
 flights <- nycflights13::flights
@@ -57,7 +55,7 @@ shinyServer(function(input, output) {
         
         keep    <- Chamois[ vals$keeprows, , drop = FALSE]
         exclude <- Chamois[!vals$keeprows, , drop = FALSE]
-        
+       
         ggplot(filtered_data(), aes(rel.Temp, b.mass, col =Sex)) +
             geom_jitter(alpha = 0.6) +
             geom_smooth(method = lm, fullrange = TRUE, aes(color = Sex)) +
