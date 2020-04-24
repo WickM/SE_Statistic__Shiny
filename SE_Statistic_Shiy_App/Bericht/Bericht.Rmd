@@ -27,10 +27,10 @@ plots <- list()
 plot_f <-function(type, data) {
   plot <- data %>% 
   dplyr::filter(percent_change_type == type) %>% 
-    mutate(over_under = p_change < 0) %>%
+    mutate(over_under = val < 0) %>%
     ggplot() +
     geom_hline(yintercept = 0, color = "gray40") +
-    geom_col(aes(x = month, y = p_change, fill = over_under)) +
+    geom_col(aes(x = date, y = val, fill = over_under)) +
     scale_y_continuous(breaks = vec_brks, labels = vec_labs) +
     scale_fill_manual(values = c("firebrick", "steelblue")) +
     facet_wrap(vars(name)) +

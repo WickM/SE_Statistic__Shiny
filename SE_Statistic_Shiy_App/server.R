@@ -41,7 +41,7 @@ shinyServer(function(input, output) {
     #' Es sollen in der UI Grafiken und Tabelle zusammengeklickt und als Markdown Bericht exportiert werden konnen
     #' 
     observeEvent(input$generate_Report, {
-        data <- table_filter()
+        data <- table_filter_big()
         rmarkdown::render('Bericht/Bericht.Rmd', 
                         output_format = epuRate::epurate(),
                         params = list(
@@ -57,23 +57,29 @@ shinyServer(function(input, output) {
         )
         })
     
-    table_filter <- reactive({
+    table_filter_big <- reactive({
         dat_mobil_change_filter <- dat_mobil_change %>% 
             dplyr::filter(name %in% input$t3_countries & 
                               percent_change_type %in% input$t3_activity & 
                               date > input$t3_date[1] & 
-                              date < input$t3_date[2]
-            ) %>%
-            dplyr::mutate(month = lubridate::month(date, label= TRUE )) %>% 
+                              date < input$t3_date[2]) %>% 
+            dplyr::arrange(name, date)
+        return(dat_mobil_change_filter)
+    })
+    
+    table_filter_small <- reactive({
+        dat_mobil_change_filter <- table_filter_big()
+        
+        dat_mobil_change_filter <- dat_mobil_change_filter %>% 
+            dplyr::mutate(month = lubridate::month(date,label =TRUE)) %>% 
             group_by(name,month,percent_change_type) %>% 
-            summarise(p_change = mean(val, na.rm = TRUE)) %>% 
-            dplyr::arrange(name,month)
+            summarise(p_change = mean(val, na.rm = TRUE))
         
         return(dat_mobil_change_filter)
     })
     
     
-    table_filter_slow <- shiny::throttle(r = table_filter, millis = 5000)
+    table_filter_slow <- shiny::throttle(r = table_filter_small, millis = 5000)
    
     output$table <- shiny::renderTable(table_filter_slow() )
 })
