@@ -15,6 +15,7 @@ renv::restore()
 #Server Library
 library(shiny)
 library(tidyverse)
+library(lubridate)
 
 #ShinyApp ab hier
 shinyServer(function(input, output) {
@@ -30,11 +31,11 @@ shinyServer(function(input, output) {
     #' Es sollen in der UI Grafiken und Tabelle zusammengeklickt und als Markdown Bericht exportiert werden konnen
     #' 
     observeEvent(input$generate_Report, {
+        data <- table_filter()
         rmarkdown::render('Bericht/Bericht.Rmd', 
                         output_format = epuRate::epurate(),
                         params = list(
-                            monat = "Mai",
-                            Airport = "EWR"
+                            data = data
                             )
                         )
         appendTab(inputId = "nav_bar", tabPanel(title = "Test",
@@ -52,12 +53,19 @@ shinyServer(function(input, output) {
                               percent_change_type %in% input$t3_activity & 
                               date > input$t3_date[1] & 
                               date < input$t3_date[2]
-            ) %>% 
-            group_by(name, percent_change_type) %>% 
-            summarise(p_change = mean(val, na.rm = TRUE))
+            ) %>%
+            dplyr::mutate(month = lubridate::month(date, label= TRUE )) %>% 
+            group_by(name,month,percent_change_type) %>% 
+            summarise(p_change = mean(val, na.rm = TRUE)) %>% 
+            dplyr::arrange(name,month)
+        
         return(dat_mobil_change_filter)
     })
     
+    
     table_filter_slow <- shiny::throttle(r = table_filter, millis = 5000)
+   
     output$table <- shiny::renderTable(table_filter_slow() )
 })
+
+

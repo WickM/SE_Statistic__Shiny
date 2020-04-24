@@ -52,7 +52,7 @@ shinyUI( navbarPage("SE Statistic Shiny APP",id = "nav_bar",
                     tabPanel("Markdown",
                              sidebarLayout(
                                  sidebarPanel(width = 4,
-                                              shiny::selectizeInput(inputId = "t3_countries", label="Countries", multiple =TRUE, choices = unique(dat_mobil_change$name), selected=  unique(dat_mobil_change$name)),
+                                              shiny::selectizeInput(inputId = "t3_countries", label="Countries", multiple =TRUE, choices = unique(dat_mobil_change$name)),
                                               shiny::selectizeInput(inputId = "t3_activity", label="Activity Type", multiple =TRUE, choices = unique(dat_mobil_change$percent_change_type), selected=  unique(dat_mobil_change$percent_change_type)),
                                               shiny::sliderInput(inputId = "t3_date", label= "Date",
                                                                  min = min(dat_mobil_change$date), 
