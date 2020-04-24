@@ -21,6 +21,7 @@ library(plotly)
 library(geepack)
 library(dplyr)
 library(readxl)
+library(png)
 
 #Daten NewYork Flugdaten
 flights <- nycflights13::flights
@@ -28,22 +29,18 @@ airports <- nycflights13::airports
 airlines <- nycflights13::airlines
 weather <- nycflights13::weather
 planes <- nycflights13::planes
-#Import data chamois
+#Import data dat_mobil_change
 
 #Chamois <- read_excel("Chamois_climate.xlsx", 
                       #col_types = c("numeric", "text", "numeric", 
                                   # "text", "numeric", "numeric"))
-#Chamois$rel.Temp <- round(as.vector(Chamois$rel.Temp),2)
+#Chamois$date <- round(as.vector(Chamois$rel.Temp),2)
 
 
 #ShinyApp ab hier
 shinyServer(function(input, output) {
     # For storing which rows have been excluded
-    vals <- reactiveValues(
-        keeprows = rep(TRUE, nrow(Chamois))
-    )
-    
-    
+
     ## output table with statistic summary
 
     output$text <- renderText(input$text)
@@ -51,50 +48,34 @@ shinyServer(function(input, output) {
     output$plot1 <- renderPlot({
         
 
-        # Plot the kept and excluded points as two separate data sets
+        # Plot filtered data
         
-        keep    <- Chamois[ vals$keeprows, , drop = FALSE]
-        exclude <- Chamois[!vals$keeprows, , drop = FALSE]
-       
-        ggplot(filtered_data(), aes(rel.Temp, b.mass, col =Sex)) +
-            geom_jitter(alpha = 0.6) +
-            geom_smooth(method = lm, fullrange = TRUE, aes(color = Sex)) +
-            geom_point(data = exclude, shape = 21, fill = NA, aes(color = Sex), alpha = 0.6) +
-            coord_cartesian(xlim = c(0.9, 1.2), ylim = c(0,30))
+
+        ggplot(filtered_data(), aes(juliandate,val),col = Movement_type) +
+            geom_jitter(alpha = 0.6, aes(color = Movement_type)) +
+            geom_smooth(method = loess, fullrange = TRUE, aes(color = Movement_type)) +
+            geom_hline(yintercept = 0, linetype="dashed", 
+                       color = "grey20", size=0.7)+
+            labs( x= "Julian date", y ="Change of Movement in %", size = 10)+
+            coord_cartesian(xlim = c(0, 110), ylim = c(-100,100))
 
     })
     
-    # Toggle points that are clicked
-    observeEvent(input$plot1_click, {
-        res <- nearPoints(Chamois, input$plot1_click, allRows = TRUE)
-        
-        vals$keeprows <- xor(vals$keeprows, res$selected_)
-    })
-    
-    # Toggle points that are brushed, when button is clicked
-    observeEvent(input$exclude_toggle, {
-        res <- brushedPoints(Chamois, input$plot1_brush, allRows = TRUE)
-        
-        vals$keeprows <- xor(vals$keeprows, res$selected_)
-    })
-    
-    # Reset all points
-    observeEvent(input$exclude_reset, {
-        vals$keeprows <- rep(TRUE, nrow(Chamois))
-    })
-    
+
     ## filter the data
     filtered_data <- reactive({
-        dplyr::filter(Chamois, Region == input$Region)
+        dplyr::filter(subset(dat_mobil_change, Movement_type =="walking" | Movement_type =="driving"| Movement_type =="stay at home"),
+                      name == input$name, dataset ==input$dataset)
     })
+  
 
     output$table <- renderTable(filtered_data() %>%
-                                    group_by(Sex) %>%
-                                    summarise("Mean" = mean(b.mass), 
-                                              "Median" = median(b.mass),
-                                              "STDEV" = sd(b.mass), 
-                                              "Min" = min(b.mass),
-                                              "Max" = max(b.mass)))
+                                    group_by(Movement_type) %>%
+                                    summarise("Mean" = mean(val), 
+                                              "Median" = median(val),
+                                              "STDEV" = sd(val), 
+                                              "Min" = min(val),
+                                              "Max" = max(val)))
     
     #Tab 2 Leafleat ##########    
     #Ab hier Code fuer Tab 1 Plot
