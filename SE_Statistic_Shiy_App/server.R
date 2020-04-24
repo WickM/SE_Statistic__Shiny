@@ -17,6 +17,16 @@ library(shiny)
 library(tidyverse)
 library(lubridate)
 
+load("data/aufb_covid_data.RData")
+
+dat_mobil_change <- dat_apple_countries %>% 
+    dplyr::mutate(date = as.Date(date)) %>% 
+    dplyr::bind_rows(., dat_google_countries, .id = "dataset") %>% 
+    dplyr::mutate(dataset = dplyr::recode(dataset, '1' = "Apple", '2' = "Google")) %>% 
+    dplyr::filter(is.na(sub_region_1) == TRUE) %>% 
+    dplyr::mutate(percent_change_type = stringr::str_remove(percent_change_type, "_percent_change_from_baseline"))
+
+
 #ShinyApp ab hier
 shinyServer(function(input, output) {
     #Tab 1 Plot Code ##########    

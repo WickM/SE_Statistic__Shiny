@@ -17,6 +17,8 @@ dat_mobil_change <- dat_apple_countries %>%
   dplyr::filter(is.na(sub_region_1) == TRUE) %>% 
   dplyr::mutate(percent_change_type = stringr::str_remove(percent_change_type, "_percent_change_from_baseline"))
 
+
+
 # Define UI for application that draws a histogram
 shinyUI( navbarPage("SE Statistic Shiny APP",id = "nav_bar",
 #Tab1----#####################################################################
