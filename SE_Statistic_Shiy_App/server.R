@@ -41,20 +41,27 @@ shinyServer(function(input, output) {
     #' Es sollen in der UI Grafiken und Tabelle zusammengeklickt und als Markdown Bericht exportiert werden konnen
     #' 
     observeEvent(input$generate_Report, {
-        data <- table_filter_big()
-        rmarkdown::render('Bericht/Bericht.Rmd', 
-                        output_format = epuRate::epurate(),
-                        params = list(
-                            data = data
+        shiny::withProgress(message = 'Report in progress',
+                            detail = 'This may take a wile',
+                            {
+                                data <- table_filter_big()
+                                shiny::setProgress(value = 0.3, message = "knit Report")
+                                rmarkdown::render('Bericht/Bericht.Rmd', 
+                                output_format = epuRate::epurate(),
+                                    params = list(
+                                    data = data
+                                    )
+                                )
+                            shiny::setProgress(value = 0.9, message = "Reporting done",detail="")
+                            appendTab(inputId = "nav_bar", tabPanel(title = "Report",
+                                                    fluidPage(
+                                                        fluidRow(
+                                                            column(12,
+                                                                   shiny::includeHTML("Bericht/Bericht.html")
+                                                                ))))
                             )
-                        )
-        appendTab(inputId = "nav_bar", tabPanel(title = "Test",
-                                                fluidPage(
-                                                    fluidRow(
-                                                        column(8,
-                                                               shiny::includeHTML("Bericht/Bericht.html")
-                                                               ))))
-        )
+                            }
+                    )
         })
     
     table_filter_big <- reactive({
@@ -79,7 +86,7 @@ shinyServer(function(input, output) {
     })
     
     
-    table_filter_slow <- shiny::throttle(r = table_filter_small, millis = 5000)
+    table_filter_slow <- shiny::throttle(r = table_filter_small, millis = 1000)
    
     output$table <- shiny::renderTable(table_filter_slow() )
 })
