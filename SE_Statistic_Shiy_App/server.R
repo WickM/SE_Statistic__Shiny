@@ -33,15 +33,6 @@ t2_covidRecoveredWorld <- t2_dataImportAndFormating("https://raw.githubuserconte
 #Server Library
 library(shiny)
 library(tidyverse)
-library(nycflights13)
-
-#Daten NewYork Flugdaten
-flights <- nycflights13::flights
-airports <- nycflights13::airports
-airlines <- nycflights13::airlines
-weather <- nycflights13::weather
-planes <- nycflights13::planes
-
 
 #ShinyApp ab hier
 shinyServer(function(input, output) {
