@@ -10,7 +10,7 @@ library(shiny)
 library(leaflet)
 library(magrittr)
 
-load("SE_Statistic_Shiy_App/data/aufb_covid_data.RData")
+load("data/aufb_covid_data.RData")
 
 dat_mobil_change <- dat_apple_countries %>% 
   dplyr::mutate(date = as.Date(date)) %>% 
@@ -43,28 +43,30 @@ tabPanel("Leaflet",
     
     sidebarPanel(
       
-      h3("Coronavirus COVID-19 Global Cases"),
+      h3("COVID-19 induced reduction in population mobility"),
       
       selectInput("t2_mapType",
-                  label = "Choose a metic to display",
-                  choices = c("Confirmed Cases", "Confirmed Deaths", "Recovered Cases"),
-                  selected = "Confirmed Cases"),
+                  label = "TESTEST",
+                  choices = c(      #TODO: RENAME
+                  "driving"="driving_percent_change_from_baseline",
+                  "walking"="walking_percent_change_from_baseline",
+                  "transit"="transit_percent_change_from_baseline",
+                  "retail"="retail_and_recreation_percent_change_from_baseline",
+                  "grocery"="grocery_and_pharmacy_percent_change_from_baseline",
+                  "parks"="parks_percent_change_from_baseline",
+                  "stations"="transit_stations_percent_change_from_baseline",
+                  "workplaces"="workplaces_percent_change_from_baseline",    
+                  "residential"="residential_percent_change_from_baseline"),
+                  selected = "walking_percent_change_from_baseline"),
 
       sliderInput("t2_date",
                   label = "Date input",
-                  min = as.Date("2020-01-22"),
-                  max = as.Date("2020-04-08"),    #TODO: automatically check for last entry
-                  value = as.Date("2020-04-08"),
+                  min = as.Date(min(dat_mobil_change$date)),
+                  max = as.Date(max(dat_mobil_change$date)),  
+                  value = as.Date(min(dat_mobil_change$date)),
                   timeFormat = "%d %b",
                   animate=animationOptions(interval = 500, loop = FALSE)
-      ),
-      
-      helpText("COVID-19 Data provided by the Johns Hopkins University Center for Systems Science and Engineering (JHU CSSE)."),
-      helpText("Source:"),
-      tags$a(href="https://github.com/CSSEGISandData/COVID-19","GitHub Repository")
-
-      
-      ),
+      ),),
     
     mainPanel(
       leafletOutput("t2_map"))
