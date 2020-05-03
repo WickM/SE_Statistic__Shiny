@@ -5,6 +5,8 @@
 #'Manuel Wick-Eckl & ... & ...
 options(stringsAsFactors = FALSE)
 
+options(stringsAsFactors = FALSE)
+
 library(shiny)
 library(magrittr)
 
@@ -20,7 +22,7 @@ dat_mobil_change <- dat_apple_countries %>%
 
 
 # Define UI for application that draws a histogram
-shinyUI( navbarPage("SE Statistic Shiny APP",id = "nav_bar",
+shinyUI( navbarPage("SE Statistic Shiny APP",
 #Tab1----#####################################################################
                         tabPanel("Plot",
                              sidebarLayout(
@@ -65,10 +67,10 @@ shinyUI( navbarPage("SE Statistic Shiny APP",id = "nav_bar",
                                    
                                  ), 
                                  mainPanel(
-                                   shiny::tableOutput(outputId = "table")
-                                 )
+                                     
                                  )
                              )
-                             
+                             )
+
 )#Navbar Ende´
 )#shinUi Ende

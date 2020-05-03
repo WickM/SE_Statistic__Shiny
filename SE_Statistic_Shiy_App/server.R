@@ -9,7 +9,7 @@ options(stringsAsFactors = FALSE)
 #Mit renv restore wird der zuletzt gespeicherte Snapshot geladen bzw. überprüft ob die Projekt Bibliothek aktuell ist.
 renv::restore()
 
-#Snapshot ist notwendig wenn librarys hinzugefügt wurden damit wir alle genau die gleichen verwenden 
+#Snapshot ist notwendig wenn librarys hinzugefügt wurden damit wir alle genau dioe gleichen verwendne 
 #renv::snapshot()
 
 #Server Library
@@ -33,7 +33,7 @@ shinyServer(function(input, output) {
     #Ab hier Code fuer Tab 1 Plot
     
     #Tab 2 Leafleat ##########    
-    #Ab hier Code fuer Tab 2 Plot
+    #Ab hier Code fuer Tab 1 Plot
     
     #Tab 3 Markdown ####################################################### 
     #Ab hier Code fuer Tab 3 Plot
