@@ -4,20 +4,17 @@ author: "Rudi, Florian & Manuel"
 date: "`r format(Sys.time(), '%d %B %Y')`"
 logo: "logo_gallery.png"
 output:
-  epuRate::epurate:
+  html_document:
     toc: FALSE
     number_sections: FALSE
     code_folding: "hide"
 params:
   data: data
 ---
-```{r include=FALSE}
-library(epuRate)
-```
-## 
-`r lorem::ipsum(paragraphs = 2)`
 
-```{r}
+## Relative Mobility Trends from Apple and Goolge Maps
+
+```{r Report_plots, echo=FALSE, message=FALSE, warning=FALSE}
 knitr::opts_chunk$set(fig.width=13, fig.height=20) 
 vec_brks <- c(-50, 0, 50)
 vec_labs <- c(-50, 0, 50)
@@ -45,4 +42,3 @@ plots <- purrr::map(unique(data$percent_change_type), ~ plot_f(type = .x, data =
 plots
 ```
 
-## Übersicht

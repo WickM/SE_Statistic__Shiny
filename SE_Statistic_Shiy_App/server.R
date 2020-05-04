@@ -95,18 +95,18 @@ shinyServer(function(input, output) {
     #' Markdown Teil der Shiny App 
     observeEvent(input$generate_Report, {
         shiny::withProgress(message = 'Report in progress',
-                            detail = 'This may take a wile',
+                            detail = 'This may take a while',
                             {
                                 data <- table_filter_big()
                                 shiny::setProgress(value = 0.3, message = "knit Report")
-                                rmarkdown::render('Bericht/Bericht.Rmd', 
-                                output_format = epuRate::epurate(),
+                                rmarkdown::render('Bericht/Bericht.Rmd',
+                                output_format = "html_document",
                                     params = list(
                                     data = data
                                     )
                                 )
                             shiny::setProgress(value = 0.9, message = "Reporting done",detail="")
-                            appendTab(inputId = "nav_bar", tabPanel(title = "Report",
+                            shiny::appendTab(inputId = "nav_bar", tabPanel(title = "Report",
                                                     fluidPage(
                                                         fluidRow(
                                                             column(12,

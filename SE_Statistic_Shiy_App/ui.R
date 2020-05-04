@@ -17,7 +17,7 @@ load("data/aufb_covid_data_shiny.RData")
 
 
 # Define UI for application that draws a histogram
-shinyUI(navbarPage("SE Statistic Shiny APP",
+shinyUI(navbarPage("SE Statistic Shiny APP", id = "nav_bar",
 #Tab1----#####################################################################
   tabPanel("Plot",
     sidebarLayout(
