@@ -9,32 +9,11 @@ options(stringsAsFactors = FALSE)
 library(shiny)
 library(leaflet)
 library(magrittr)
-library(magrittr)
-install.packages("epitools")
+#install.packages("epitools")
 library(epitools)
 
-load("data/aufb_covid_data.RData")
-
-dat_mobil_change <- dat_apple_countries %>% 
-  dplyr::mutate(date = as.Date(date)) %>% 
-  dplyr::bind_rows(., dat_google_countries, .id = "dataset") %>% 
-  dplyr::mutate(dataset = dplyr::recode(dataset, '1' = "Apple", '2' = "Google")) %>% 
-  dplyr::filter(is.na(sub_region_1) == TRUE) %>% 
-  dplyr::mutate(percent_change_type = stringr::str_remove(percent_change_type, "_percent_change_from_baseline"))
-
-dat_mobil_change <- dat_apple_countries %>% 
-  dplyr::mutate(date = as.Date(date)) %>% 
-  dplyr::bind_rows(., dat_google_countries, .id = "dataset") %>% 
-  dplyr::mutate(dataset = dplyr::recode(dataset, '1' = "Apple", '2' = "Google")) %>% 
-  dplyr::filter(is.na(sub_region_1) == TRUE)
-
-
-dat_mobil_change$juliandate <-julian(dat_mobil_change$date, origin = as.Date("2020-01-01"),)
-dat_mobil_change$percent_change_type[dat_mobil_change$percent_change_type == "driving_percent_change_from_baseline"] <- "driving"
-dat_mobil_change$percent_change_type[dat_mobil_change$percent_change_type == "walking_percent_change_from_baseline"] <- "walking"
-dat_mobil_change$percent_change_type[dat_mobil_change$percent_change_type == "residential_percent_change_from_baseline"] <- "stay at home"
-colnames(dat_mobil_change)[7] <- "Movement_type"
-
+load("data/aufb_covid_data_shiny.RData")
+#load("SE_Statistic_Shiy_App/data/aufb_covid_data_shiny.RData")
 
 
 # Define UI for application that draws a histogram
@@ -91,9 +70,9 @@ tabPanel("Leaflet",
 
       sliderInput("t2_date",
                   label = "Date input",
-                  min = as.Date(min(dat_mobil_change$date)),
-                  max = as.Date(max(dat_mobil_change$date)),  
-                  value = as.Date(min(dat_mobil_change$date)),
+                  min = as.Date(min(dat_mobil_change_tab_plot$date)),
+                  max = as.Date(max(dat_mobil_change_tab_plot$date)),  
+                  value = as.Date(min(dat_mobil_change_tab_plot$date)),
                   timeFormat = "%d %b",
                   animate=animationOptions(interval = 500, loop = FALSE)
       ),),
@@ -107,22 +86,21 @@ tabPanel("Leaflet",
   tabPanel("Markdown",
     sidebarLayout(
       sidebarPanel(width = 4,
-        shiny::selectizeInput(inputId = "t3_countries", label="Countries", multiple =TRUE, choices = unique(dat_mobil_change$name)),
-        shiny::selectizeInput(inputId = "t3_activity", label="Activity Type", multiple =TRUE, choices = unique(dat_mobil_change$percent_change_type), selected=  unique(dat_mobil_change$percent_change_type)),
+        shiny::selectizeInput(inputId = "t3_countries", label="Countries", multiple =TRUE, choices = unique(dat_mobil_change_tab_markdown$name)),
+        shiny::selectizeInput(inputId = "t3_activity", label="Activity Type", multiple =TRUE, choices = unique(dat_mobil_change_tab_markdown$percent_change_type), selected=  unique(dat_mobil_change_tab_markdown$percent_change_type)),
         shiny::sliderInput(inputId = "t3_date", label= "Date",
-                           min = min(dat_mobil_change$date), 
-                           max = max(dat_mobil_change$date),
-                           value = c(min(dat_mobil_change$date) ,max(dat_mobil_change$date))),
+                           min = min(dat_mobil_change_tab_markdown$date), 
+                           max = max(dat_mobil_change_tab_markdown$date),
+                           value = c(min(dat_mobil_change_tab_markdown$date) ,max(dat_mobil_change_tab_markdown$date))),
         shiny::tags$br(), shiny::tags$hr(),
         actionButton(inputId = "generate_Report", label = "generate Report")
         ), 
                                  
       mainPanel(
-                                     
-                                 )
-                               
-                             )
-                    )
+        shiny::tableOutput(outputId = "tb3_table")
+        )
+      )
+    )
                     
 )#Navbar Ende´
 )#shinUi Ende

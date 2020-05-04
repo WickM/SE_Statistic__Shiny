@@ -10,51 +10,27 @@ options(stringsAsFactors = FALSE)
 #renv::restore()
 
 #Snapshot ist notwendig wenn librarys hinzugefügt wurden damit wir alle genau dioe gleichen verwendne 
-renv::snapshot()
+#renv::snapshot()
+
 
 #Leaflet Library
 library(leaflet)
 
 #Server Library
 library(shiny)
-library(tidyverse)
+library(dplyr)
 library(lubridate)
 library(ggplot2)
 library(plotly)
 library(geepack)
-library(dplyr)
-library(readxl)
 library(png)
 
-#Data import
-library(magrittr)
+load("data/aufb_covid_data_shiny.RData")
 
-#Chamois <- read_excel("Chamois_climate.xlsx", 
-                      #col_types = c("numeric", "text", "numeric", 
-                                  # "text", "numeric", "numeric"))
-#Chamois$date <- round(as.vector(Chamois$rel.Temp),2)
-
-dat_mobil_change <- dat_apple_countries %>% 
-    dplyr::mutate(date = as.Date(date)) %>% 
-    dplyr::bind_rows(., dat_google_countries, .id = "dataset") %>% 
-    dplyr::mutate(dataset = dplyr::recode(dataset, '1' = "Apple", '2' = "Google")) %>% 
-    dplyr::filter(is.na(sub_region_1) == TRUE)
-
-
-
-dat_mobil_change <- dat_apple_countries %>% 
-    dplyr::mutate(date = as.Date(date)) %>% 
-    dplyr::bind_rows(., dat_google_countries, .id = "dataset") %>% 
-    dplyr::mutate(dataset = dplyr::recode(dataset, '1' = "Apple", '2' = "Google")) %>% 
-    dplyr::filter(is.na(sub_region_1) == TRUE) %>% 
-    dplyr::mutate(percent_change_type = stringr::str_remove(percent_change_type, "_percent_change_from_baseline"))
-
-
-load("data/aufb_covid_data.RData")
 #ShinyApp ab hier
 shinyServer(function(input, output) {
 
-    #Tab 1 Plot ################################################################################    
+#Tab 1 Plot ################################################################################    
     output$text <- renderText(input$text)
     
     output$t2_map <- renderLeaflet({
@@ -108,7 +84,7 @@ shinyServer(function(input, output) {
     })
 
      t2_data <- function(t2_type){
-         t2_data_help <- data.frame(dat_mobil_change)
+         t2_data_help <- data.frame(dat_mobil_change_tab_plot)
          t2_data_help <- t2_data_help[t2_data_help$percent_change_type == input$t2_mapType, ] 
          return(t2_data_help[t2_data_help$date == input$t2_date, ])
              
@@ -142,7 +118,7 @@ shinyServer(function(input, output) {
         })
     
     table_filter_big <- reactive({
-        dat_mobil_change_filter <- dat_mobil_change %>% 
+        dat_mobil_change_filter <- dat_mobil_change_tab_markdown %>% 
             dplyr::filter(name %in% input$t3_countries & 
                               percent_change_type %in% input$t3_activity & 
                               date > input$t3_date[1] & 
@@ -166,7 +142,7 @@ shinyServer(function(input, output) {
 
     table_filter_slow <- shiny::throttle(r = table_filter_small, millis = 1000)
    
-    output$table <- shiny::renderTable(table_filter_slow() )
+    output$tb3_table <- shiny::renderTable(table_filter_slow() )
 })
 
 

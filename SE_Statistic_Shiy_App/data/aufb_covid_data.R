@@ -12,6 +12,7 @@ options(stringsAsFactors = FALSE)
 
 #'Libraries:
 library(tidyverse)
+library(magrittr)
 #rvest
 #xml2
 
@@ -79,5 +80,36 @@ dat_google_countries <-
   select(country, name, sub_region_1, latitude, longitude, date, percent_change_type, val)
 
 ###save ----
-save(dat_apple_countries, dat_apple_cities, dat_google_countries, file = "SE_Statistic_Shiy_App/data/aufb_covid_data.RData")
+#save(dat_apple_countries, dat_apple_cities, dat_google_countries, file = "SE_Statistic_Shiy_App/data/aufb_covid_data.RData")
+load("SE_Statistic_Shiy_App/data/aufb_covid_data.RData")
+
+#Tab spezifische daten
+
+
+dat_mobil_change_tab_markdown <- dat_apple_countries %>% 
+  dplyr::mutate(date = as.Date(date)) %>% 
+  dplyr::bind_rows(., dat_google_countries, .id = "dataset") %>% 
+  dplyr::mutate(dataset = dplyr::recode(dataset, '1' = "Apple", '2' = "Google")) %>% 
+  dplyr::filter(is.na(sub_region_1) == TRUE) %>% 
+  dplyr::mutate(percent_change_type = stringr::str_remove(percent_change_type, "_percent_change_from_baseline"))
+
+dat_mobil_change_tab_plot <- dat_apple_countries %>% 
+  dplyr::mutate(date = as.Date(date)) %>% 
+  dplyr::bind_rows(., dat_google_countries, .id = "dataset") %>% 
+  dplyr::mutate(dataset = dplyr::recode(dataset, '1' = "Apple", '2' = "Google")) %>% 
+  dplyr::filter(is.na(sub_region_1) == TRUE)
+
+dat_mobil_change <- dat_apple_countries %>% 
+  dplyr::mutate(date = as.Date(date)) %>% 
+  dplyr::bind_rows(., dat_google_countries, .id = "dataset") %>% 
+  dplyr::mutate(dataset = dplyr::recode(dataset, '1' = "Apple", '2' = "Google")) %>% 
+  dplyr::filter(is.na(sub_region_1) == TRUE)
+
+dat_mobil_change$juliandate <-julian(dat_mobil_change$date, origin = as.Date("2020-01-01"),)
+dat_mobil_change$percent_change_type[dat_mobil_change$percent_change_type == "driving_percent_change_from_baseline"] <- "driving"
+dat_mobil_change$percent_change_type[dat_mobil_change$percent_change_type == "walking_percent_change_from_baseline"] <- "walking"
+dat_mobil_change$percent_change_type[dat_mobil_change$percent_change_type == "residential_percent_change_from_baseline"] <- "stay at home"
+colnames(dat_mobil_change)[7] <- "Movement_type"
+
+save(dat_mobil_change_tab_markdown, dat_mobil_change_tab_plot, dat_mobil_change, file = "SE_Statistic_Shiy_App/data/aufb_covid_data_shiny.RData")
 
