@@ -53,22 +53,16 @@ dat_mobil_change <- dat_apple_countries %>%
 load("data/aufb_covid_data.RData")
 #ShinyApp ab hier
 shinyServer(function(input, output) {
-    # For storing which rows have been excluded
 
-    ## output table with statistic summary
-
+    #Tab 1 Plot ################################################################################    
     output$text <- renderText(input$text)
     
-    #Tab 2 Leaflet ################################################################################    
     output$t2_map <- renderLeaflet({
         leaflet() %>%
         addProviderTiles(providers$CartoDB.Positron)
     })
     output$plot1 <- renderPlot({
-        
-
         # Plot filtered data
-        
 
         ggplot(filtered_data(), aes(juliandate,val),col = Movement_type) +
             geom_jitter(alpha = 0.6, aes(color = Movement_type)) +
@@ -120,16 +114,9 @@ shinyServer(function(input, output) {
              
      }
 
-
-     
-    
-    #Tab 3 Markdown ##########    
-    #Ab hier Code fuer Tab 1 Plot
     #Tab 3 Markdown ####################################################### 
     #Ab hier Code fuer Tab 3 Plot
     #' Markdown Teil der Shiny App 
-    #' Es sollen in der UI Grafiken und Tabelle zusammengeklickt und als Markdown Bericht exportiert werden konnen
-    #' 
     observeEvent(input$generate_Report, {
         shiny::withProgress(message = 'Report in progress',
                             detail = 'This may take a wile',
