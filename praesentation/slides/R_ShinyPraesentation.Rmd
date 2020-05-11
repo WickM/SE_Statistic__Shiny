@@ -22,8 +22,8 @@ options(htmltools.dir.version = FALSE)
 
 ```{r xaringan-themer, include=FALSE, warning=FALSE}
 xaringanthemer::style_duo(
-  primary_color = "#1F4257",
-  secondary_color =  "#F97B64"
+  primary_color = "#025E73",
+  secondary_color =  "#F2A341"
 )
 ```
 class: inverse, center
