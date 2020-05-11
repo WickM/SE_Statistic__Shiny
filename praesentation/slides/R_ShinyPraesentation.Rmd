@@ -1,0 +1,94 @@
+---
+title: "Shiny"
+subtitle: "Se Statistic"  
+author: 
+  - "Flo"
+  - "Rudi"
+  - "Manuel"
+date: '`r Sys.Date()`'
+output:
+  xaringan::moon_reader:
+    lib_dir: libs
+    css: xaringan-themer.css
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+---
+
+```{r setup, include=FALSE}
+options(htmltools.dir.version = FALSE)
+```
+
+```{r xaringan-themer, include=FALSE, warning=FALSE}
+xaringanthemer::style_duo(
+  primary_color = "#1F4257",
+  secondary_color =  "#F97B64"
+)
+```
+class: inverse, center
+
+#Agenda
+
+--
+
+1.Was ist Shiny
+
+--
+
+2.Frontend/Backend
+
+--
+
+3.Layout  
+
+--
+
+4.Shiny Input/Output  
+
+--
+
+5.Shiny Reactive
+
+--
+
+6.Abschluss
+
+---
+class: inverse, center, middle
+#1. Was ist Shiny
+---
+###Was ist Shiny
+...
+---
+class: inverse, center, middle
+#2. Frontend/Backend
+---
+###Frontend/Backend
+...
+---
+class: inverse, center, middle
+#3. Layout  
+---
+### Layout
+...
+---
+class: inverse, center, middle
+#4. Shiny Input/Output  
+---
+###Shiny Input/Output
+...
+---
+class: inverse, center, middle
+#5. Shiny Reactive
+---
+###Shiny Reactive
+...
+---
+class: inverse, center, middle
+#6. Abschluss
+---
+###Abschlus
+---
+...
+---
