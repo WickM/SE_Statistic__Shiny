@@ -14,6 +14,7 @@ output:
       highlightStyle: github
       highlightLines: true
       countIncrementalSlides: false
+      beforeInit: "https://platform.twitter.com/widgets.js"
 ---
 
 ```{r setup, include=FALSE}
@@ -59,19 +60,33 @@ class: inverse, center, middle
 #1. Was ist Shiny
 ---
 ###Was ist Shiny
-...
+
+
+
+<blockquote class="twitter-tweet tw-align-center" data-lang="de"><p lang="en" dir="ltr">You&#39;re doing it right if you get frustrated: if you&#39;re not frustrated, you&#39;re (probably) not stretching yourself mentally</p>&mdash; Hadley Wickham (@hadleywickham) <a href="https://twitter.com/hadleywickham/status/565516733516349441?ref_src=twsrc%5Etfw">11. Februar 2015</a></blockquote>
 ---
 class: inverse, center, middle
 #2. Frontend/Backend
 ---
 ###Frontend/Backend
-...
+
+---
+<iframe 
+  src="https://shiny.rstudio.com/gallery/mri-images.html" 
+  style="position:absolute; top:0; left:0; bottom:0; right:0; width:100%; height:100vh; border:none; margin:0; padding:0; overflow:hidden; z-index:999999;"> 
+</iframe>
 ---
 class: inverse, center, middle
 #3. Layout  
 ---
 ### Layout
-...
+---
+#### Layout x
+```{r echo=FALSE, out.width="400px", out.width="400px"}
+knitr::include_graphics("https://shiny.rstudio.com/images/Shiny-Application-Layout-Guide-images/columnLayout.png")
+```
+
+
 ---
 class: inverse, center, middle
 #4. Shiny Input/Output  
@@ -79,6 +94,12 @@ class: inverse, center, middle
 ###Shiny Input/Output
 ...
 ---
+<iframe 
+  src="https://shiny.rstudio.com/gallery/widget-gallery.html" 
+  style="position:absolute; top:0; left:0; bottom:0; right:0; width:130%; height:100vh; border:none; margin:0; padding:0; overflow:hidden; z-index:999999;"> 
+</iframe>
+---
+
 class: inverse, center, middle
 #5. Shiny Reactive
 ---
