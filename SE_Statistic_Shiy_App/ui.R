@@ -52,21 +52,21 @@ tabPanel("Leaflet",
     
     sidebarPanel(
       
-      h3("COVID-19 induced reduction in population mobility"),
+      h5("COVID-19 induced reduction in population mobility"),
       
       selectInput("t2_mapType",
-                  label = "TESTEST",
-                  choices = c(      #TODO: RENAME
-                  "driving"="driving_percent_change_from_baseline",
-                  "walking"="walking_percent_change_from_baseline",
-                  "transit"="transit_percent_change_from_baseline",
-                  "retail"="retail_and_recreation_percent_change_from_baseline",
-                  "grocery"="grocery_and_pharmacy_percent_change_from_baseline",
-                  "parks"="parks_percent_change_from_baseline",
-                  "stations"="transit_stations_percent_change_from_baseline",
-                  "workplaces"="workplaces_percent_change_from_baseline",    
-                  "residential"="residential_percent_change_from_baseline"),
-                  selected = "walking_percent_change_from_baseline"),
+                  label = "mobility metric",
+                  choices = c(
+                    "driving"="driving_percent_change_from_baseline",
+                    "walking"="walking_percent_change_from_baseline",
+                    "transit"="transit_percent_change_from_baseline",
+                    "retail store visits"="retail_and_recreation_percent_change_from_baseline",
+                    "grocery store visits"="grocery_and_pharmacy_percent_change_from_baseline",
+                    "park visits"="parks_percent_change_from_baseline",
+                    "train station usage"="transit_stations_percent_change_from_baseline",
+                    "workplaces occupation"="workplaces_percent_change_from_baseline",    
+                    "staying at home"="residential_percent_change_from_baseline"),
+                  selected = "driving_percent_change_from_baseline"),
 
       sliderInput("t2_date",
                   label = "Date input",
@@ -74,7 +74,7 @@ tabPanel("Leaflet",
                   max = as.Date(max(dat_mobil_change_tab_plot$date)),  
                   value = as.Date(min(dat_mobil_change_tab_plot$date)),
                   timeFormat = "%d %b",
-                  animate=animationOptions(interval = 500, loop = FALSE)
+                  animate=animationOptions(interval = 1000, loop = FALSE)
       ),),
     
     mainPanel(

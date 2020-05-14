@@ -66,19 +66,18 @@ shinyServer(function(input, output) {
                                               "Min" = min(val),
                                               "Max" = max(val)))
     
-    #Tab 2 Leafleat ##########    
-    #Ab hier Code fuer Tab 1 Plot
-    
+    #Tab 2 Leaflet ##########    
+    # Ab hier Code fuer Tab 2 Plot
     observeEvent(c(input$t2_mapType, input$t2_date), {
         leafletProxy("t2_map") %>% 
         clearMarkers() %>%
         clearShapes() %>%
-        addCircleMarkers(data = t2_data(input$t2_mapType),  #TODO: addCircleMarkers or addCircles
+        addCircles(data = t2_data(input$t2_mapType),
                          lat = ~latitude, 
                          lng = ~longitude , 
                          label = ~paste(name, ":", val),
                          weight = 1,
-                         radius = ~abs(val),               #TODO: proper scaling
+                         radius = ~log(abs(val),2)*25000,
                          fillOpacity = 0.1, 
                          color = ~ifelse(val>0,"red","green"))
     })
@@ -91,8 +90,8 @@ shinyServer(function(input, output) {
      }
 
     #Tab 3 Markdown ####################################################### 
-    #Ab hier Code fuer Tab 3 Plot
-    #' Markdown Teil der Shiny App 
+    # Ab hier Code fuer Tab 3 Plot
+    # Markdown Teil der Shiny App 
     observeEvent(input$generate_Report, {
         shiny::withProgress(message = 'Report in progress',
                             detail = 'This may take a while',
