@@ -7,9 +7,9 @@
 options(stringsAsFactors = FALSE)
 
 #Mit renv restore wird der zuletzt gespeicherte Snapshot geladen bzw. überprüft ob die Projekt Bibliothek aktuell ist.
-#renv::restore()
+renv::restore()
 
-#Snapshot ist notwendig wenn librarys hinzugefügt wurden damit wir alle genau dioe gleichen verwendne 
+#Snapshot ist notwendig wenn librarys hinzugefügt wurden damit wir alle genau die gleichen verwenden 
 #renv::snapshot()
 
 

@@ -79,12 +79,59 @@ class: inverse, center, middle
 class: inverse, center, middle
 #3. Layout  
 ---
-### Layout
----
-#### Layout x
-```{r echo=FALSE, out.width="400px", out.width="400px"}
-knitr::include_graphics("https://shiny.rstudio.com/images/Shiny-Application-Layout-Guide-images/columnLayout.png")
+### Common Layout Options
+
+
+.left-column[
+```{r echo=FALSE, out.height = "525px"}
+knitr::include_graphics("https://bookdown.org/weicheng/shinyTutorial/images/layout.png")
 ```
+]
+
+.right-column[
+```{r eval=FALSE, echo=TRUE}
+library(shiny)
+
+ui <- fluidPage( 
+  sidebarLayout(
+    sidebarPanel("side panel"),
+    mainPanel("main panel")
+  )
+)
+
+server <- function(input, output) { }
+
+shinyApp(ui = ui, server = server)
+```
+
+```{r eval=FALSE, echo=TRUE}
+splitLayout("Object 1", "Object 2" )
+```
+
+```{r eval=FALSE, echo=TRUE}
+verticalLayout("Object 1", "Object 2", "Object 3")
+```
+]
+---
+### HTML Tags
+
+110 HTML tags can be used with builder functions in RShiny:
+
+
+```{undefined eval=FALSE, echo=TRUE}
+Link:         <a href="url">link text</a>   a("link text", href="url")
+Image:        <img src="image.jpg">         img(src = "image.png")
+Linebreak:    <br>                          br()
+Bold:         <strong>bold text</strong>    strong("bold text")
+Italic:       <em>italic text</em>          em("italic text")
+Lvl. 1 Header:<h1>header<\h1>               h1("header")
+Lvl. 2 Header:<h2>header<\h2>               h2("header")
+...
+```
+
+-
+Using the HTML() function markes the text as HTML
+
 
 
 ---

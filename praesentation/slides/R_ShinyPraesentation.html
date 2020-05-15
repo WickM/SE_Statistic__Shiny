@@ -6,7 +6,7 @@
     <meta name="author" content="Flo" />
     <meta name="author" content="Rudi" />
     <meta name="author" content="Manuel" />
-    <meta name="date" content="2020-05-11" />
+    <meta name="date" content="2020-05-15" />
     <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
   </head>
   <body>
@@ -18,7 +18,7 @@ class: center, middle, inverse, title-slide
 ### Flo
 ### Rudi
 ### Manuel
-### 2020-05-11
+### 2020-05-15
 
 ---
 
@@ -78,10 +78,56 @@ class: inverse, center, middle
 class: inverse, center, middle
 #3. Layout  
 ---
-### Layout
+### Common Layout Options
+
+
+.left-column[
+&lt;img src="https://bookdown.org/weicheng/shinyTutorial/images/layout.png" height="525px" /&gt;
+]
+
+.right-column[
+
+```r
+library(shiny)
+
+ui &lt;- fluidPage( 
+  sidebarLayout(
+    sidebarPanel("side panel"),
+    mainPanel("main panel")
+  )
+)
+
+server &lt;- function(input, output) { }
+
+shinyApp(ui = ui, server = server)
+```
+
+
+```r
+splitLayout("Object 1", "Object 2" )
+```
+
+
+```r
+verticalLayout("Object 1", "Object 2", "Object 3")
+```
+]
 ---
-#### Layout x
-&lt;img src="https://shiny.rstudio.com/images/Shiny-Application-Layout-Guide-images/columnLayout.png" width="400px" /&gt;
+### HTML Tags
+
+110 HTML tags can be used with functions in RShiny:
+
+
+
+```undefined
+Link:      &lt;a href="url"&gt;link text&lt;/a&gt;      a("link text", href="url")
+Image:     &lt;img src="image.jpg"&gt;            img(src = "image.png")
+Linebreak: &lt;br&gt;                             br()
+Bold:      &lt;strong&gt;bold text&lt;/strong&gt;       strong("bold text")
+Italic:    &lt;em&gt;italic text&lt;/em&gt;             em("italic text")
+
+```
+
 
 
 ---
