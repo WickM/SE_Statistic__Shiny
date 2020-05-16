@@ -1,33 +1,34 @@
-#
-# This is the user-interface definition of a Shiny web application. You can
-# run the application by clicking 'Run App' above.
-#
-# Find out more about building applications with Shiny here:
-#
-#    http://shiny.rstudio.com/
-#
-
 library(shiny)
 
-# Define UI for application that draws a histogram
-shinyUI(fluidPage(
+linkToLogo <- "https://upload.wikimedia.org/wikipedia/commons/d/d0/RStudio_logo_flat.svg"
 
-    # Application title
-    titlePanel("Old Faithful Geyser Data"),
-
-    # Sidebar with a slider input for number of bins
-    sidebarLayout(
-        sidebarPanel(
-            sliderInput("bins",
-                        "Number of bins:",
-                        min = 1,
-                        max = 50,
-                        value = 30)
-        ),
-
-        # Show a plot of the generated distribution
-        mainPanel(
-            plotOutput("distPlot")
-        )
-    )
-))
+shinyUI(navbarPage(
+    "Exercise 2",
+    tabPanel("Side Bar Layout",
+        # code for "Side Bar Layout" tab here (aprox. 6 lines of code)
+        
+        
+        
+        
+        
+    ),
+    tabPanel("Image",
+       # code for image tab here (aprox. 1 line of code)     
+    ),
+    tabPanel("Links",
+       # code for links tab here (aprox. 4 lines of code)
+       
+       
+       
+    )))
+# ~+~+~+ TIPPS +~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~
+# Layout objects needed:
+#   splitLayout()and sidebarLayout() with mainPanel() and sidebarPanel()
+#
+# Image in HTML: <img src="picture URL" width="64" height="128">
+# Linking to R Shiny home page in HTML:  
+#   <a href="https://shiny.rstudio.com/"> R Shiny Homepage </a>
+#
+# Do not forgett to escape " with \" in R!
+#
+# ~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+

@@ -115,27 +115,48 @@ verticalLayout("Object 1", "Object 2", "Object 3")
 ---
 ### HTML Tags
 
-110 HTML tags can be used with builder functions in RShiny:
+110 HTML tags can be used with builder functions in RShiny
+
+<!-- Unnamed arguments will be passed into the tag; named arguments will become tag attributes -->
 
 
 ```{undefined eval=FALSE, echo=TRUE}
-Link:         <a href="url">link text</a>   a("link text", href="url")
-Image:        <img src="image.jpg">         img(src = "image.png")
-Linebreak:    <br>                          br()
-Bold:         <strong>bold text</strong>    strong("bold text")
-Italic:       <em>italic text</em>          em("italic text")
-Lvl. 1 Header:<h1>header<\h1>               h1("header")
-Lvl. 2 Header:<h2>header<\h2>               h2("header")
-...
+Link:           <a href="url">link text</a>  a("link text", href="url")
+Image:          <img src="image.jpg">        img(src="image.png")
+Linebreak:      <br>                         br()
+Horizontal Line:<hr>                         hr()
+Bold:           <strong>bold text</strong>   strong("bold text")
+Italic:         <em>italic text</em>         em("italic text")
+Lvl. 1 Header:  <h1>header<\h1>              h1("header")
+Lvl. 2 Header:  <h2>header<\h2>              h2("header")
 ```
 
--
-Using the HTML() function markes the text as HTML
 
 
+```{undefined eval=FALSE, echo=TRUE}
+tags$h1("header") <=> h1("header")
+tags$iframe(...)
+```
+
+
+Using the HTML() function markes the argument as HTML and formats it accordingly.
+
+CSS and JavaScript files can be linked.
+---
+### Layout Exercise
+Create navbarPage layout with three different tabs:
+  1. Tab called "Side Bar Layout":
+    + Use the sidebar layout with the side bar on the right
+    + Write some bold text in sidebar panel
+    + Format the title text in main panel as a header
+  2. Tab called "Image":
+    + Use img() to insert the R studio logo and set the width to 50% <br> (You can use the URL in the linkToLogo variable)
+  3. Tab called "Links":
+    + Use split layout and split the tab in two columns with 75% und 25% of the total width
+    + On the left side use HTML() with HTML tags to link to the R Shiny webpage
+    + On the right side use the shiny function a() that simplyifies this
 
 ---
-class: inverse, center, middle
 #4. Shiny Input/Output  
 ---
 ###Shiny Input/Output

@@ -36,7 +36,6 @@ ui <- fluidPage(
   sidebarLayout(
     sidebarPanel("This is the sidebar panel"),
     mainPanel("This is the main panel"),
-    #position = "right"
   ),
   
 )

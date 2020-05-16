@@ -6,6 +6,7 @@ ui <- fluidPage(
   titlePanel("Layout Demo 2"),
   
   sidebarLayout(
+    position = "right",
     sidebarPanel("This is the sidebar panel"),
     mainPanel(
       splitLayout(
@@ -17,12 +18,11 @@ ui <- fluidPage(
       hr(),
       
       splitLayout(
-        cellWidths = c("25%", "55%", "20%"), 
+        cellWidths = c("25%", "50%", "25%"), 
         "Some text for column 1",
         "Some text for column 2",
         "Some text for column 3"
       ),
-      
       
       br(),
       br(),
@@ -36,7 +36,7 @@ ui <- fluidPage(
        This is a very long text block below the split layout. It occupies the full width of our demo app.
        This is a very long text block below the split layout. It occupies the full width of our demo app.
        This is a very long text block below the split layout. It occupies the full width of our demo app.",
-      
+
       br(),
       br(),
       br(),
