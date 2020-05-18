@@ -1,0 +1,46 @@
+---
+title: "Statistics, Visualization and More Using 'R' "
+author: "Rudi, Florian & Manuel"
+date: "`r format(Sys.time(), '%d %B %Y')`"
+logo: "logo_gallery.png"
+output:
+  html_document:
+    toc: FALSE
+    number_sections: FALSE
+    code_folding: "hide"
+params:
+  data: data
+---
+## 
+
+```{r, results='asis', echo=FALSE,}
+knitr::opts_chunk$set(fig.width=13, fig.height=20) 
+vec_brks <- c(-50, 0, 50)
+vec_labs <- c(-50, 0, 50)
+plots <- list()
+
+#params$data %>%
+plot_f <-function(type, data) {
+  plot <- data %>% 
+  dplyr::filter(percent_change_type == type) %>% 
+    mutate(over_under = val < 0) %>%
+    ggplot() +
+    geom_hline(yintercept = 0, color = "gray40") +
+    geom_col(aes(x = date, y = val, fill = over_under)) +
+    scale_y_continuous(breaks = vec_brks, labels = vec_labs) +
+    scale_fill_manual(values = c("firebrick", "steelblue")) +
+    facet_wrap(vars(name)) +
+    guides(fill = FALSE) +
+    labs(x = "Date", y = "Relative Mobility", title = "Relative Trends in Apple/Goolge Maps",
+                              subtitle =glue::glue("% change in {type} mobility compared to Baseline") ,
+        caption = "Data: Apple and Goolge Móbility Trend") +
+    theme_minimal()
+}
+
+for (ii in unique(params$data$percent_change_type)) {
+  cat(glue::glue("## % change in {ii} mobility compared to Baseline"))
+  print(plot_f(type = ii, data = params$data))
+  cat("\n\n")
+}
+
+```

@@ -172,7 +172,9 @@ class: inverse, center, middle
 #5. Shiny Reactive
 ---
 ###Shiny Reactive
-...
+
+
+
 ---
 class: inverse, center, middle
 #6. Abschluss

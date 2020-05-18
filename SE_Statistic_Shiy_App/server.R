@@ -22,8 +22,6 @@ library(dplyr)
 library(lubridate)
 library(ggplot2)
 library(plotly)
-library(geepack)
-library(png)
 
 load("data/aufb_covid_data_shiny.RData")
 

@@ -9,8 +9,6 @@ options(stringsAsFactors = FALSE)
 library(shiny)
 library(leaflet)
 library(magrittr)
-#install.packages("epitools")
-library(epitools)
 
 load("data/aufb_covid_data_shiny.RData")
 #load("SE_Statistic_Shiy_App/data/aufb_covid_data_shiny.RData")
