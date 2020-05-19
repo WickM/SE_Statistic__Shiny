@@ -41,14 +41,11 @@ ui <- fluidPage(
 )
 # End of UI code----
 
-
 # Start of server code----
 server <- function(input, output) {
   # for this layout demo no actual functions are needed
 }
 # End of server code----
 
-
-
 # Run the app ----
-shinyApp(ui = ui, server = server)
+shinyApp(ui, server)

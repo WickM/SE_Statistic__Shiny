@@ -12,7 +12,6 @@ ui <- navbarPage("Layout Demo 3",
      tabPanel(
        "Side Bar Layout",
         sidebarLayout(
-          # position = "right",
           sidebarPanel("This is the sidebar panel"),
           mainPanel(mainText)
         )
@@ -37,4 +36,4 @@ server <- function(input, output) {
 }
 
 # Run the app ----
-shinyApp(ui = ui, server = server)
+shinyApp(ui, server)

@@ -27,9 +27,9 @@ shinyUI(navbarPage(
 
 # ~+~+~+ TIPPS +~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~
 # Layout objects needed:
-#   splitLayout(), mainPanel(), sidebarPanel(), sidebarLayout(), navbarPage()
+#   splitLayout() and sidebarLayout() with mainPanel() and sidebarPanel()
 #
-# Image in HTML: <img src="picture URL" width="64" height="128">
+# Image in HTML: <img src="picture_URL" width="64" height="128">
 # Linking to R Shiny home page in HTML:  
 #   <a href="https://shiny.rstudio.com/"> R Shiny Homepage </a>
 #

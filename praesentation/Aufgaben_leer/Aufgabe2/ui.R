@@ -16,11 +16,12 @@ shinyUI(navbarPage(
        # code for image tab here (aprox. 1 line of code)     
     ),
     tabPanel("Links",
-       # code for links tab here (aprox. 4 lines of code)
+             splitLayout(
+       # code for links tab here (aprox. 3 lines of code)
        
        
        
-    )))
+    ))))
 # ~+~+~+ TIPPS +~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~
 # Layout objects needed:
 #   splitLayout()and sidebarLayout() with mainPanel() and sidebarPanel()
