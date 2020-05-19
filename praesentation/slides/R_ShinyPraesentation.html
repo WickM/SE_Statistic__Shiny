@@ -6,7 +6,7 @@
     <meta name="author" content="Flo" />
     <meta name="author" content="Rudi" />
     <meta name="author" content="Manuel" />
-    <meta name="date" content="2020-05-18" />
+    <meta name="date" content="2020-05-20" />
     <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
   </head>
   <body>
@@ -18,7 +18,7 @@ class: center, middle, inverse, title-slide
 ### Flo
 ### Rudi
 ### Manuel
-### 2020-05-18
+### 2020-05-20
 
 ---
 
@@ -48,7 +48,7 @@ class: inverse, center
 
 --
 
-5.Shiny Reactive
+5.Shiny Reactivity
 
 --
 
@@ -171,17 +171,145 @@ Create navbarPage layout with three different tabs:
 ---
 
 class: inverse, center, middle
-#5. Shiny Reactive
+#5. Shiny Reactivity
 ---
-###Shiny Reactive
-...
+class: inverse, center, middle
+#Reactivity is where the SHINY Magic happens
+---
+
+###Reactivity makes Shiny responisive to User Input. 
+-Server Function is "listening" for **Reactive Sources**
+
+-Server sends Information to **Reactive Endpoint**  
+
+https://shiny.rstudio.com/gallery/widget-gallery.html 
+
+&lt;img src="img/reactivity1.png" width="709" /&gt;
+
+
+---
+###Reactive Enviroment
+Reactive input con only be processed in an "reactive Enviroment"
+
+**Input is not in an reactive Enviroment**
+
+```r
+server &lt;- function(input, output) {
+  # Not an reactive Enviroment
+  # Will couse an ERROR
+* input      &lt;- input$n
+  output$nthValue &lt;- input
+}
+```
+
+--
+**Input is in an reactive Enviroment**
+
+```r
+server &lt;- function(input, output) {
+* output$nthValue &lt;- renderText({ as.character(input$n) })
+}
+```
+---
+###Reactive sources
+Reactive Input/ Reactive Values  
+-actionButton()  
+-checkboxInput()  
+-selectInput()  
+-textInput()  
+-...  
+
+
+```r
+#UI
+library(shiny)
+ui &lt;- fluidPage(
+* numericInput(inputId ="num", label = h3("Numeric input"), value = 1),
+  hr(),
+  fluidRow(column(3, verbatimTextOutput(outputId ="value")))
+)
+```
+
+
+```r
+server &lt;- function(input, output) {
+* output$nthValue &lt;- renderText({ as.character(input$n) })
+}
+```
+---
+###reactive expressions
+
+-reactive()
+-eventReactive()
+
+
+
+```r
+#reactive()
+value &lt;- reactive({
+  input$num1 + input$num2
+})
+```
+
+
+```r
+#eventReactive()
+value &lt;- eventReactive(input$num1, {
+  input$num1 + input$num2
+  })
+```
+
+-Return a value  
+-Can react to different Sources  
+-Can react to reactive Expressions
+---
+
+
+```r
+#reactive()
+value &lt;- reactive({
+  input$num1 + input$num2
+})
+
+value2 &lt;- reactive({
+  value + input$num3
+})
+```
+---
+###observers
+
+
+---
+###reactive Endpoints
+
+---
+###Task4 Reactivity
+
 ---
 class: inverse, center, middle
 #6. Abschluss
 ---
-###Abschlus
----
-...
+###Deployment
+Where to put the finished Shiny App?  
+
+  
+--
+-Shiny Server  
+https://rstudio.com/products/shiny/shiny-server/  
+
+--
+-Shiny Proxy  
+https://www.shinyproxy.io/  
+
+--
+-Shiyapps.io  
+https://www.shinyapps.io/  
+
+--
+
+**And thats what we did**  
+**https://manuelw.shinyapps.io/SE_Statistic_Shiy_App/**
+
 ---
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
