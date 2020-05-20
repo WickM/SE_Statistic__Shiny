@@ -140,24 +140,23 @@ Using the `HTML()` function markes the argument as HTML and formats it according
 CSS and JavaScript files can be linked.
 ---
 ### Layout Exercise
-Create navbarPage layout with three different tabs:
-  1. Create Tab called "Side Bar Layout":
-    + Use the sidebar layout with the side bar on the right.
-    + Write some bold text in sidebar panel.
-    + Format the title text in main panel as a header.
-  2. Create Tab called "Image":
-    + Use img() to insert an image of Old Faithful and set the width to 50%. <br> Use the URL in the provided linkToImage variable.
-  3. Create Tab called "Links":
-    + Use split layout and split the tab in two columns with 75% und 25% of the total width.
-    + On the left side use HTML() with HTML tags to link to the R Shiny webpage.
-    + On the right side use the shiny function a() to link to the same page.
+  1. Create navbarPage layout with the title `Exercise 2`.
+  2. Create tabs called `Plot`, `Leaflet` and `Markdown`:
+  3. Create a sidebar layout in the `Plot` tab:
+  4. Insert the string `"This is the main panel"` in the main panel.
+  5. Insert a picture of the SARS-CoV-2 virus into the side bar panel.
+    - Use a builder function with the link provided in the `CoronaVirusImageLink` variable.
+    - Set the image width to `100%`
+    
+    **Bonus**: If you have time, use the `HTML()` function replace the text in the main panel with the picture.
 
+    ![SARS-CoV-2](https://upload.wikimedia.org/wikipedia/commons/8/82/SARS-CoV-2_without_background.png "SARS-CoV-2")
 ---
 class: inverse, center, middle
 #4. Shiny Input
 ---
 class: center, middle
-Shiny Widgets Gallery
+##Shiny Widgets Gallery
 
 https://shiny.rstudio.com/gallery/widget-gallery.html
 ---
@@ -171,20 +170,24 @@ UI Output functions display different kinds of output from the application.
 
 Examples:
 
-Plot: &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Server: `renderPlot()` &nbsp; &nbsp; &nbsp; &nbsp; UI: `plotOutput()`
+- Plot: &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Server: `renderPlot()` &nbsp; &nbsp; &nbsp; &nbsp; UI: `plotOutput()`
 
-Table: &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; Server: `renderTable()` &nbsp; &nbsp; &nbsp; UI: `tableOutput()`
+- Table: &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; Server: `renderTable()` &nbsp; &nbsp; &nbsp; UI: `tableOutput()`
 
-Leaflet: &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Server: `renderLeaflet` &nbsp; &nbsp; &nbsp; UI: `leafletOutput()`
+- Leaflet: &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; Server: `renderLeaflet` &nbsp; &nbsp; &nbsp; UI: `leafletOutput()`
 
 ---
 ### Basic Shiny App Exercise
 
-Exercise Text
-Exercise Text
-Exercise Text
-Exercise Text
-Exercise Text
++ Use 3 different input functions in the sidebar:
+  1. Input for selection of the countries provided
+  2. Checkbox input choosing between `"Apple"` and `"Google"` data
+  3. Text input for the Title
++ Add the text processing with `renderText()` to the server function
++ Display all 3 elements stored in the output object by the server in the main panel
+  1. Format the text as a header
+  2. Display the table
+  3. Display the plot
 ---
 
 class: inverse, center, middle

@@ -9,16 +9,16 @@ ui <- navbarPage(
            sidebarLayout(
              # Data selection in the sidebar below
              sidebarPanel(
-               selectInput("country", 
-                           label = "Please select Country",
-                           choices = c("Austria", "Sweden", "Germany", "Italy", "Japan")),
-               checkboxGroupInput("dataset",
-                                  label = "Source", 
-                                  choices = c("Apple","Google"), 
-                                  selected = c("Apple","Google")),
-               textInput("text", 
-                         label = "Enter Title", 
-                         value = "Title"),
+               .......("country", 
+                           ............,
+                           ..... = c("Austria", "Sweden", "Germany", "Italy", "Japan")),
+               .......("dataset",
+                                  ..........., 
+                                 choices = ....., 
+                                 selected = ......),
+               .......("text", 
+                         label = ........., 
+                         value = .........),
                br(),
                
                img(src=CoronaVirusImageLink, width = "100%")
@@ -26,18 +26,18 @@ ui <- navbarPage(
              
              # Output in the main panel below
              mainPanel(
-               h2(textOutput("text")),
-               tableOutput("table"),
-               plotOutput("plot")
+               ..(.........(.......)),
+               ............(...... ),
+               ............(.......)
              )
-           )  
-        ),
+           )
+  ),
   tabPanel("Leaflet"),
   tabPanel("Markdown")
 )
 
 server <- function(input, output) {
-  output$text <- renderText(input$text)
+  ....$text <- .........(.........)
   
   # TODO insert code for other output
 }
