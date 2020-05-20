@@ -31,10 +31,6 @@ shinyServer(function(input, output) {
 #Tab 1 Plot ################################################################################    
     output$text <- renderText(input$text)
     
-    output$t2_map <- renderLeaflet({
-        leaflet() %>%
-        addProviderTiles(providers$CartoDB.Positron)
-    })
     output$plot1 <- renderPlot({
         # Plot filtered data
 
@@ -66,6 +62,12 @@ shinyServer(function(input, output) {
     
     #Tab 2 Leaflet ##########    
     # Ab hier Code fuer Tab 2 Plot
+    
+    output$t2_map <- renderLeaflet({
+      leaflet() %>%
+        addProviderTiles(providers$CartoDB.Positron)
+    })
+    
     observeEvent(c(input$t2_mapType, input$t2_date), {
         leafletProxy("t2_map") %>% 
         clearMarkers() %>%

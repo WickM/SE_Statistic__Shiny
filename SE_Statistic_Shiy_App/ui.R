@@ -13,35 +13,41 @@ library(magrittr)
 load("data/aufb_covid_data_shiny.RData")
 #load("SE_Statistic_Shiy_App/data/aufb_covid_data_shiny.RData")
 
+CoronaVirusImageLink <- "https://upload.wikimedia.org/wikipedia/commons/8/82/SARS-CoV-2_without_background.png"
 
 # Define UI for application that draws a histogram
 shinyUI(navbarPage("SE Statistic Shiny APP", id = "nav_bar",
 #Tab1----#####################################################################
-  tabPanel("Plot",
-    sidebarLayout(
-      sidebarPanel(
-      #Ab hier Code fuer Sidebar
-        selectInput("name", "Please select Country",
-                    choices=c("Austria","Sweden", "Germany", "Italy", "Japan")),
-        checkboxGroupInput("dataset","Source", choices=c("Apple","Google"), selected = c("Apple","Google")),
-        textInput("text", "Enter some text to be displayed", "")
-        ),
-                               
-        mainPanel(
-          h3(textOutput("text"),width = 6, align = "center"),
-          tableOutput("table"),width = 6, align = "Center",
-              fluidPage(
-                fluidRow(
-                  column(width = 12, align = "Center",
-                    plotOutput("plot1", height = 350),
-                  ),
-                  #actionButton("exclude_toggle", "Toggle points"),
-                  # actionButton("exclude_reset", "Reset")
-                )
-              )
-          )
-      )
-    ),
+tabPanel("Plot",
+         sidebarLayout(
+           sidebarPanel(
+             #Ab hier Code fuer Sidebar
+             selectInput("name", 
+                         label = "Please select Country",
+                         choices = c("Austria", "Sweden", "Germany", "Italy", "Japan")),
+             checkboxGroupInput("dataset",
+                                label = "Source", 
+                                choices = c("Apple","Google"), 
+                                selected = c("Apple","Google")),
+             textInput("text", 
+                       label = "Enter Title", 
+                       value = "Title"),
+             
+             br(),
+             br(),
+             
+             img(src=CoronaVirusImageLink, width = "100%")
+             
+           ),
+           mainPanel(
+             verticalLayout(
+               h2(textOutput("text")),
+               tableOutput("table"),
+               plotOutput("plot1")
+             )
+           )
+         )
+),
 
 #Tab2----#####################################################################
 
