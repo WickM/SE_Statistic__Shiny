@@ -6,7 +6,7 @@
     <meta name="author" content="Flo" />
     <meta name="author" content="Rudi" />
     <meta name="author" content="Manuel" />
-    <meta name="date" content="2020-05-19" />
+    <meta name="date" content="2020-05-20" />
     <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
   </head>
   <body>
@@ -18,7 +18,7 @@ class: center, middle, inverse, title-slide
 ### Flo
 ### Rudi
 ### Manuel
-### 2020-05-19
+### 2020-05-20
 
 ---
 
@@ -152,11 +152,11 @@ Create navbarPage layout with three different tabs:
     + Write some bold text in sidebar panel.
     + Format the title text in main panel as a header.
   2. Create Tab called "Image":
-    + Use img() to insert the R studio logo and set the width to 50%. &lt;br&gt; You can use the URL in the linkToLogo variable.
+    + Use img() to insert an image of Old Faithful and set the width to 50%. &lt;br&gt; Use the URL in the provided linkToImage variable.
   3. Create Tab called "Links":
     + Use split layout and split the tab in two columns with 75% und 25% of the total width.
     + On the left side use HTML() with HTML tags to link to the R Shiny webpage.
-    + On the right side use the shiny function a() that simplyifies this.
+    + On the right side use the shiny function a() to link to the same page.
 
 ---
 class: inverse, center, middle
@@ -166,10 +166,27 @@ class: center, middle
 Shiny Widgets Gallery
 
 https://shiny.rstudio.com/gallery/widget-gallery.html
+---
+class: inverse, center, middle
+#5. Shiny Output
+---
+### Shiny Output
+Rendering functions are used in application’s server side code, assigning them to outputs that appear in your user interface.
+
+UI Output functions display different kinds of output from the application.
+
+Examples:
+
+Plot: &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; Server: ```renderPlot()``` &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; UI: ```plotOutput()```
+
+Table: &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp;&amp;nbsp; Server: ```renderTable()``` &amp;nbsp; &amp;nbsp; &amp;nbsp; UI: ```tableOutput()```
+
+Leaflet: &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; Server: ```renderLeaflet()``` &amp;nbsp; UI: ```leafletOutput()```
+
 
 ---
 class: inverse, center, middle
-#5. Shiny Reactive
+#6. Shiny Reactive
 ---
 ###Shiny Reactive
 
@@ -177,7 +194,7 @@ class: inverse, center, middle
 
 ---
 class: inverse, center, middle
-#6. Abschluss
+#7. Abschluss
 ---
 ###Abschlus
 ---

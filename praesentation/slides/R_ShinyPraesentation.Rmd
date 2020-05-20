@@ -154,7 +154,7 @@ Create navbarPage layout with three different tabs:
   3. Create Tab called "Links":
     + Use split layout and split the tab in two columns with 75% und 25% of the total width.
     + On the left side use HTML() with HTML tags to link to the R Shiny webpage.
-    + On the right side use the shiny function a() that simplyifies this.
+    + On the right side use the shiny function a() to link to the same page.
 
 ---
 class: inverse, center, middle
@@ -166,7 +166,37 @@ Shiny Widgets Gallery
 https://shiny.rstudio.com/gallery/widget-gallery.html
 ---
 class: inverse, center, middle
-#5. Shiny Reactive
+#5. Shiny Output
+---
+### Shiny Output
+Rendering functions are used in application’s server side code, assigning them to outputs that appear in your user interface.
+
+UI Output functions display different kinds of output from the application.
+
+Examples:
+
+Plot: &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Server: ```renderPlot()``` &nbsp; &nbsp; &nbsp; &nbsp; UI: ```plotOutput()```
+
+Table: &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; Server: ```renderTable()``` &nbsp; &nbsp; &nbsp; UI: ```tableOutput()```
+
+Leaflet: &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Server: ```renderLeaflet()``` &nbsp; UI: ```leafletOutput()```
+---
+### Basic Shiny App Exercise
+Create navbarPage layout with three different tabs:
+  1. Create Tab called "Side Bar Layout":
+    + Use the sidebar layout with the side bar on the right.
+    + Write some bold text in sidebar panel.
+    + Format the title text in main panel as a header.
+  2. Create Tab called "Image":
+    + Use img() to insert an image of Old Faithful and set the width to 50%. <br> Use the URL in the provided linkToImage variable.
+  3. Create Tab called "Links":
+    + Use split layout and split the tab in two columns with 75% und 25% of the total width.
+    + On the left side use HTML() with HTML tags to link to the R Shiny webpage.
+    + On the right side use the shiny function a() to link to the same page.
+
+---
+class: inverse, center, middle
+#6. Shiny Reactive
 ---
 ###Shiny Reactive
 
@@ -174,7 +204,7 @@ class: inverse, center, middle
 
 ---
 class: inverse, center, middle
-#6. Abschluss
+#7. Abschluss
 ---
 ###Abschlus
 ---
