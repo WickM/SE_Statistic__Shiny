@@ -135,7 +135,7 @@ tags$h1("header") <=> h1("header")
 tags$iframe(...)
 ```
 
-Using the HTML() function markes the argument as HTML and formats it accordingly.
+Using the `HTML()` function markes the argument as HTML and formats it accordingly.
 
 CSS and JavaScript files can be linked.
 ---
@@ -171,11 +171,11 @@ UI Output functions display different kinds of output from the application.
 
 Examples:
 
-Plot: &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Server: ```renderPlot()``` &nbsp; &nbsp; &nbsp; &nbsp; UI: ```plotOutput()```
+Plot: &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Server: `renderPlot()` &nbsp; &nbsp; &nbsp; &nbsp; UI: `plotOutput()`
 
-Table: &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; Server: ```renderTable()``` &nbsp; &nbsp; &nbsp; UI: ```tableOutput()```
+Table: &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; Server: `renderTable()` &nbsp; &nbsp; &nbsp; UI: `tableOutput()`
 
-Leaflet: &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Server: ```renderLeaflet()``` &nbsp; UI: ```leafletOutput()```
+Leaflet: &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Server: `renderLeaflet` &nbsp; &nbsp; &nbsp; UI: `leafletOutput()`
 
 ---
 ### Basic Shiny App Exercise
