@@ -29,9 +29,9 @@ load("data/aufb_covid_data_shiny.RData")
 shinyServer(function(input, output) {
 
 #Tab 1 Plot ################################################################################    
-    output$text <- renderText(input$text)
+    output$t1_text <- renderText(input$t1_text)
     
-    output$plot1 <- renderPlot({
+    output$t1_plot <- renderPlot({
         # Plot filtered data
 
         ggplot(filtered_data(), aes(juliandate,val),col = Movement_type) +
@@ -43,16 +43,14 @@ shinyServer(function(input, output) {
             coord_cartesian(xlim = c(0, 110), ylim = c(-100,100))
 
     })
-    
 
     ## filter the data
     filtered_data <- reactive({
         dplyr::filter(subset(dat_mobil_change, Movement_type =="walking" | Movement_type =="driving"| Movement_type =="stay at home"),
-                      name == input$t1_country, dataset ==input$dataset)
+                      name == input$t1_country, dataset ==input$t1_dataset)
     })
-  
 
-    output$table <- renderTable(filtered_data() %>%
+    output$t1_table <- renderTable(filtered_data() %>%
                                     group_by(Movement_type) %>%
                                     summarise("Mean" = mean(val), 
                                               "Median" = median(val),

@@ -24,11 +24,11 @@ tabPanel("Plot",
              selectInput("t1_country", 
                          label = "Please select Country",
                          choices = c("Austria", "Sweden", "Germany", "Italy", "Japan")),
-             checkboxGroupInput("dataset",
+             checkboxGroupInput("t1_dataset",
                                 label = "Source", 
                                 choices = c("Apple","Google"), 
                                 selected = c("Apple","Google")),
-             textInput("text", 
+             textInput("t1_text", 
                        label = "Enter Title", 
                        value = "Title"),
              br(),
@@ -37,9 +37,9 @@ tabPanel("Plot",
             ),
            
            mainPanel(
-             h2(textOutput("text")),
-             tableOutput("table"),
-             plotOutput("plot1")
+             h2(textOutput("t1_text")),
+             tableOutput("t1_table"),
+             plotOutput("t1_plot")
            )
          )
 ),
