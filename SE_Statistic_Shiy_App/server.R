@@ -48,7 +48,7 @@ shinyServer(function(input, output) {
     ## filter the data
     filtered_data <- reactive({
         dplyr::filter(subset(dat_mobil_change, Movement_type =="walking" | Movement_type =="driving"| Movement_type =="stay at home"),
-                      name == input$name, dataset ==input$dataset)
+                      name == input$t1_country, dataset ==input$dataset)
     })
   
 
