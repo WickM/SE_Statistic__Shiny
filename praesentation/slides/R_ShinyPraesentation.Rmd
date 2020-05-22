@@ -105,7 +105,7 @@ shinyApp(ui = ui, server = server)
 ```
 
 ```{r eval=FALSE, echo=TRUE}
-splitLayout("Object 1", "Object 2" )
+splitLayout("Object 1", "Object 2")
 ```
 
 ```{r eval=FALSE, echo=TRUE}
@@ -117,9 +117,6 @@ verticalLayout("Object 1", "Object 2", "Object 3")
 
 110 HTML tags can be used with builder functions in RShiny
 
-<!-- Unnamed arguments will be passed into the tag; named arguments will become tag attributes -->
-
-
 ```{undefined eval=FALSE, echo=TRUE}
 Link:           <a href="url">link text</a>  a("link text", href="url")
 Image:          <img src="image.jpg">        img(src="image.png")
@@ -127,8 +124,8 @@ Linebreak:      <br>                         br()
 Horizontal Line:<hr>                         hr()
 Bold:           <strong>bold text</strong>   strong("bold text")
 Italic:         <em>italic text</em>         em("italic text")
-Lvl. 1 Header:  <h1>header<\h1>              h1("header")
-Lvl. 2 Header:  <h2>header<\h2>              h2("header")
+Lvl. 1 Header:  <h1>header</h1>              h1("header")
+Lvl. 2 Header:  <h2>header</h2>              h2("header")
 ```
 
 
@@ -138,38 +135,63 @@ tags$h1("header") <=> h1("header")
 tags$iframe(...)
 ```
 
-
-Using the HTML() function markes the argument as HTML and formats it accordingly.
+Using the `HTML()` function markes the argument as HTML and formats it accordingly.
 
 CSS and JavaScript files can be linked.
 ---
 ### Layout Exercise
-Create navbarPage layout with three different tabs:
-  1. Tab called "Side Bar Layout":
-    + Use the sidebar layout with the side bar on the right
-    + Write some bold text in sidebar panel
-    + Format the title text in main panel as a header
-  2. Tab called "Image":
-    + Use img() to insert the R studio logo and set the width to 50% <br> (You can use the URL in the linkToLogo variable)
-  3. Tab called "Links":
-    + Use split layout and split the tab in two columns with 75% und 25% of the total width
-    + On the left side use HTML() with HTML tags to link to the R Shiny webpage
-    + On the right side use the shiny function a() that simplyifies this
+  1. Create navbarPage layout with the title `Exercise 2`.
+  2. Create tabs called `Plot`, `Leaflet` and `Markdown`:
+  3. Create a sidebar layout in the `Plot` tab:
+  4. Insert the string `"This is the main panel"` in the main panel.
+  5. Insert a picture of the SARS-CoV-2 virus into the side bar panel.
+    - Use a builder function with the link provided in the `CoronaVirusImageLink` variable.
+    - Set the image width to `100%`
+    
+    **Bonus**: If you have time, use the `HTML()` function replace the text in the main panel with the picture.
+
+    ![SARS-CoV-2](https://upload.wikimedia.org/wikipedia/commons/8/82/SARS-CoV-2_without_background.png "SARS-CoV-2")
+---
+class: inverse, center, middle
+#4. Shiny Input
+---
+class: center, middle
+##Shiny Widgets Gallery
+
+https://shiny.rstudio.com/gallery/widget-gallery.html
+---
+class: inverse, center, middle
+#5. Shiny Output
+---
+### Shiny Output
+Rendering functions are used in application’s server side code, assigning them to outputs that appear in your user interface.
+
+UI Output functions display different kinds of output from the application.
+
+Examples:
+
+- Plot: &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Server: `renderPlot()` &nbsp; &nbsp; &nbsp; &nbsp; UI: `plotOutput()`
+
+- Table: &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; Server: `renderTable()` &nbsp; &nbsp; &nbsp; UI: `tableOutput()`
+
+- Leaflet: &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; Server: `renderLeaflet` &nbsp; &nbsp; &nbsp; UI: `leafletOutput()`
 
 ---
-#4. Shiny Input/Output  
----
-###Shiny Input/Output
-...
----
-<iframe 
-  src="https://shiny.rstudio.com/gallery/widget-gallery.html" 
-  style="position:absolute; top:0; left:0; bottom:0; right:0; width:130%; height:100vh; border:none; margin:0; padding:0; overflow:hidden; z-index:999999;"> 
-</iframe>
+### Basic Shiny App Exercise
+
++ Use 3 different input functions in the sidebar:
+  1. Input for selection of the countries provided
+  2. Checkbox input choosing between `"Apple"` and `"Google"` data
+  3. Text input for the Title
++ Add the text processing with `renderText()` to the server function
++ Display all 3 elements stored in the output object by the server in the main panel
+  1. Format the text as a header
+  2. Display the table
+  3. Display the plot
 ---
 
 class: inverse, center, middle
-#5. Shiny Reactivity
+#6. Shiny Reactive
 ---
 class: inverse, center, middle
 #Reactivity is where the SHINY Magic happens
@@ -323,7 +345,7 @@ observeEvent(input$num1, {
 
 ---
 class: inverse, center, middle
-#6. Abschluss
+#7. Abschluss
 ---
 
 
