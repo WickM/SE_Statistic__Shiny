@@ -16,12 +16,12 @@ ui <- navbarPage(
              # Data selection in the sidebar below
              sidebarPanel(
                .......("country", 
-                           ............,
-                           ..... = c("Austria", "Sweden", "Germany", "Italy", "Japan")),
+                       ............,
+                       choices = c("Austria", "Sweden", "Germany", "Italy", "Japan")),
                .......("dataset",
-                                  ..........., 
-                                 choices = ....., 
-                                 selected = ......),
+                       ..........., 
+                       choices = c("Apple","Google"), 
+                       selected = ......),
                .......("text", 
                          label = ........., 
                          value = .........),
