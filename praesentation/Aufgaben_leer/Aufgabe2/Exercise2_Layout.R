@@ -7,7 +7,7 @@ ui <- ........(
   "Exercise 2",
   .......("......",
            ..........(
-             .....Panel(...(src = ........, width = "....")),
+             .....Panel("..........."),
              .....Panel("...........")
            )
   ),
@@ -20,12 +20,10 @@ ui <- ........(
 #  navbarPage() with tabPanel()
 #  sidebarLayout() with mainPanel() and sidebarPanel()
 #
-# Inserting Image using HTML: <img src="picture_URL" width="100%">
-# When using HTML() " have to be escaped using \"
 # ~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+
 
 server <- function(input, output) {
-  # for this layout demo no actual functions are needed
+  # for this layout demo no server functions are needed
 }
 
 # Run the app ----

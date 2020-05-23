@@ -230,14 +230,13 @@ verticalLayout("Object 1", "Object 2", "Object 3")
 110 HTML tags can be used with builder functions in RShiny
 
 ```{undefined eval=FALSE, echo=TRUE}
-Link:           <a href="url">link text</a>  a("link text", href="url")
-Image:          <img src="image.jpg">        img(src="image.png")
 Linebreak:      <br>                         br()
 Horizontal Line:<hr>                         hr()
 Bold:           <strong>bold text</strong>   strong("bold text")
 Italic:         <em>italic text</em>         em("italic text")
 Lvl. 1 Header:  <h1>header</h1>              h1("header")
-Lvl. 2 Header:  <h2>header</h2>              h2("header")
+Link:           <a href="url">link text</a>  a("link text", href="url")
+Image:          <img src="image.jpg">        img(src="image.png")
 ```
 
 
@@ -256,13 +255,12 @@ CSS and JavaScript files can be linked.
   2. Create tabs called `Plot`, `Leaflet` and `Markdown`:
   3. Create a sidebar layout in the `Plot` tab:
   4. Insert the string `"This is the main panel"` in the main panel.
-  5. Insert a picture of the SARS-CoV-2 virus into the side bar panel.
-    - Use a builder function with the link provided in the `CoronaVirusImageLink` variable.
-    - Set the image width to `100%`
+  4. Insert the string `"This is the side bar panel"` in the side bar panel.
     
-    **Bonus**: If you have time, use the `HTML()` function replace the text in the main panel with the picture.
+**Bonus**: If you have time, insert a picture of the SARS-CoV-2 virus into the side bar panel instead of the text.
+Use a builder function with the link provided in the `CoronaVirusImageLink` variable.
 
-    ![SARS-CoV-2](https://upload.wikimedia.org/wikipedia/commons/8/82/SARS-CoV-2_without_background.png "SARS-CoV-2")
+![SARS-CoV-2](https://upload.wikimedia.org/wikipedia/commons/8/82/SARS-CoV-2_without_background.png "SARS-CoV-2")
 ---
 class: inverse, center, middle
 #4. Shiny Input
@@ -297,11 +295,11 @@ Examples:
   1. Input for selection of the countries provided
   2. Checkbox input choosing between `"Apple"` and/or `"Google"` data
   3. Text input for the title
-+ Add the text processing with `renderText()` to the server function
++ Add the text processing for the title with `renderText()` to the server function
 + Display all 3 elements stored in the output object by the server in the main panel
   1. Format the text as a header
   2. Display the table
-  3. Display the plot
+  3. Display the plotly plot
 ---
 
 class: inverse, center, middle
