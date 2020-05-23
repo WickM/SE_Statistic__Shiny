@@ -17,7 +17,7 @@ ui <- ........(
 
 # ~+~+~+ TIPPS +~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~
 # Layout objects needed:
-#  navbarPage() with navbarPage()
+#  navbarPage() with tabPanel()
 #  sidebarLayout() with mainPanel() and sidebarPanel()
 #
 # Inserting Image using HTML: <img src="picture_URL" width="100%">

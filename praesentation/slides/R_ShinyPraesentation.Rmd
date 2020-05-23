@@ -29,52 +29,164 @@ xaringanthemer::style_duo(
 ```
 class: inverse, center
 
-#Agenda
+### Agenda
 
---
-
-1.Was ist Shiny
-
---
-
-2.Frontend/Backend
-
---
-
-3.Layout  
-
---
-
-4.Shiny Input/Output  
-
---
-
-5.Shiny Reactivity
-
---
-
-6.Abschluss
+- Introduction
+- Components of a shiny app
+- Layouts
+- Input and Output
+- Reactive/Render functions in shiny
+- Our shiny app
 
 ---
-class: inverse, center, middle
-#1. Was ist Shiny
+### Procedure
+
+- Explain theoretical background
+
+- Create shiny app together based on prepared exercises
+  
+
+```{r }
+# output$table <- ...(filtered_data() %>%
+#                                    group_by(Movement_type) %>%
+#                                    summarise("Mean" = mean(val), 
+#                                              "Median" = median(val),
+#                                              "STDEV" = sd(val), 
+#                                              "Min" = min(val),
+#                                              "Max" = max(val)))
+```
+- The sum of the 4 excercises results in this app
+
+- Show the extended version of our app
+
 ---
-###Was ist Shiny
+### What is shiny?
+
+The shiny package (initialy released in 2014) allows to "easily" build interactive web apps or dashboards from R
+
+They can act as standalone web pages, or elemtens, created with shiny can be included in reports
+
+No HTML, CSS or Javascript knowledge is needed but, HTML and CSS based web pages can be integrated in R
+---
+### Sources
+
+**Tutorials**
+
+ - https://shiny.rstudio.com/tutorial/
+ 
+
+ - https://rstudio.github.io/shiny/tutorial/
+ 
+
+ **Shiny contest**
+ 
+- https://community.rstudio.com/t/shiny-contest-winners-2019-full-list/36347
+
+---
+### Our shiny app
+
+Shiny apps can be embedded in RMardown (as app or via the url)
 
 
+```{r}
+knitr::include_app("https://manuelw.shinyapps.io/SE_Statistic_Shiy_App/",
+                   height = '600px')
 
-<blockquote class="twitter-tweet tw-align-center" data-lang="de"><p lang="en" dir="ltr">You&#39;re doing it right if you get frustrated: if you&#39;re not frustrated, you&#39;re (probably) not stretching yourself mentally</p>&mdash; Hadley Wickham (@hadleywickham) <a href="https://twitter.com/hadleywickham/status/565516733516349441?ref_src=twsrc%5Etfw">11. Februar 2015</a></blockquote>
+```
 ---
-class: inverse, center, middle
-#2. Frontend/Backend
----
-###Frontend/Backend
+### Installing shiny and starting shiny project
 
+Installation as usual
+
+```{r, echo=TRUE, , warning=FALSE, message=FALSE}
+# install.packages('shiny')
+# library('shiny')
+```
+
+"New Shiny Web app"
 ---
-<iframe 
-  src="https://shiny.rstudio.com/gallery/mri-images.html" 
-  style="position:absolute; top:0; left:0; bottom:0; right:0; width:100%; height:100vh; border:none; margin:0; padding:0; overflow:hidden; z-index:999999;"> 
-</iframe>
+### Structure an components of a Shiny App (1/3)
+
+Shiny apps have three components
+
+- a user Interface object `(ui)`
+- a server function `(server)`
+- a call which creates the shinyApp objects `shinyApp(ui = ui, server = server)`
+
+The ui object and the server function can be together in one `app.R` (single-file app)
+or in seperate `ui.R` and `server.R` scripts
+---
+
+### Single-file app
+
+```{r eval=FALSE, echo=TRUE}
+library(shiny)
+
+# Define UI for application
+ui <- fluidPage(
+...
+
+)
+
+# Define server logic
+server <- function(input, output) {
+...
+
+}
+
+# Run the application 
+shinyApp(ui = ui, server = server)
+```
+---
+
+### Structure and components of a shiny app (2/3)
+
+The `ui` object controls the appearance of the app
+
+The `server` function contains the "instructions" to build the app
+
+When seperate `ui.R` and `server.R` are used, all components have to be in one working directory, where no components of another app are stored
+---
+
+### Structure an components of a shiny app (3/3)
+
+Every component of the app, has a code in the ```ui``` and in the ```server```
+
+The `ui` defines the layout of the app, the input method (Buttons, Sliders, Checkbox...) and it`s appearance 
+
+The `server` can include outputs, returned by different R packages
+- ggplot
+- plotly
+- leaflet
+- RMarkdown
+- etc.
+---
+
+### Run shiny app
+
+Shiny apps can directly be started/run in R
+
+- Run in Window
+- Run in Viewer Pane
+- Run External
+---
+
+### Deployment
+Where to put the finished Shiny App?
+
+
+-Shiny Server
+https://rstudio.com/products/shiny/shiny-server/
+
+
+-Shiny Proxy
+https://www.shinyproxy.io/
+
+
+-Shinyapps.io
+https://www.shinyapps.io/
+
+
 ---
 class: inverse, center, middle
 #3. Layout  
@@ -174,15 +286,17 @@ Examples:
 
 - Table: &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; Server: `renderTable()` &nbsp; &nbsp; &nbsp; UI: `tableOutput()`
 
-- Leaflet: &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; Server: `renderLeaflet` &nbsp; &nbsp; &nbsp; UI: `leafletOutput()`
+- Plotly: &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Server: `renderPlotly()` &nbsp; &nbsp; UI: `plotlyOutput()`
+
+- Leaflet: &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Server: `renderLeaflet()` &nbsp;UI: `leafletOutput()`
 
 ---
 ### Basic Shiny App Exercise
 
 + Use 3 different input functions in the sidebar:
   1. Input for selection of the countries provided
-  2. Checkbox input choosing between `"Apple"` and `"Google"` data
-  3. Text input for the Title
+  2. Checkbox input choosing between `"Apple"` and/or `"Google"` data
+  3. Text input for the title
 + Add the text processing with `renderText()` to the server function
 + Display all 3 elements stored in the output object by the server in the main panel
   1. Format the text as a header

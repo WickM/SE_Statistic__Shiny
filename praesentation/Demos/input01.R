@@ -5,25 +5,25 @@ ui <- fluidPage(
   
   sidebarLayout(
     sidebarPanel(
-      selectInput(inputId = "selectBar", 
+      selectInput(inputId = "selectBarColor", 
                   label = h4("Select Bar Color"), 
                   choices = list("yellow", "red", "green", "blue", "black", "white"), 
                   selected = "green"),
       
-      radioButtons(inputId = "selectBorder", 
+      radioButtons(inputId = "selectBorderColor", 
                    label = h4("Select Border Color"), 
                    choices = list("yellow", "red", "green", "blue", "black", "white"), 
                    selected = "blue",
                    inline = TRUE),
       
-      sliderInput(inputId = "range", 
+      sliderInput(inputId = "selectRange", 
                   label = h4("Select Display Range"),
                   min = 1, 
                   max = 6,
                   value = c(1,6),
                   step = 0.5),
       
-      numericInput(inputId = "buckets",
+      numericInput(inputId = "selcetNumberOfbuckets",
                    label = h4("Number of Histogram Buckets"),
                    min = 5,
                    max = 65,
@@ -39,12 +39,12 @@ ui <- fluidPage(
 server <- function(input, output) {
   output$plot <- renderPlot({
     hist(faithful$eruptions, 
-         breaks = input$buckets - 1, 
-         col = input$selectBar, 
-         border = input$selectBorder,
+         breaks = input$selcetNumberOfbuckets - 1, 
+         col = input$selectBarColor, 
+         border = input$selectBorderColor,
          xlab = "Category",
-         xlim = input$range,
+         xlim = input$selectRange,
          main = "Demo Histogram"
-  )})} 
+    )})} 
 
 shinyApp(ui, server)
