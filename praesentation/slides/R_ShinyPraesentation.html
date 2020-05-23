@@ -293,15 +293,17 @@ Examples:
 
 - Table: &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp;&amp;nbsp; Server: `renderTable()` &amp;nbsp; &amp;nbsp; &amp;nbsp; UI: `tableOutput()`
 
-- Leaflet: &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp;&amp;nbsp; Server: `renderLeaflet` &amp;nbsp; &amp;nbsp; &amp;nbsp; UI: `leafletOutput()`
+- Plotly: &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; Server: `renderPlotly()` &amp;nbsp; &amp;nbsp; UI: `plotlyOutput()`
+
+- Leaflet: &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; Server: `renderLeaflet()` &amp;nbsp;UI: `leafletOutput()`
 
 ---
 ### Basic Shiny App Exercise
 
 + Use 3 different input functions in the sidebar:
   1. Input for selection of the countries provided
-  2. Checkbox input choosing between `"Apple"` and `"Google"` data
-  3. Text input for the Title
+  2. Checkbox input choosing between `"Apple"` and/or `"Google"` data
+  3. Text input for the title
 + Add the text processing with `renderText()` to the server function
 + Display all 3 elements stored in the output object by the server in the main panel
   1. Format the text as a header

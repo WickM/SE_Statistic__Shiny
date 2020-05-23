@@ -5,9 +5,9 @@ account: manuelw
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 2320351
-bundleId: 3163504
+bundleId: 3182553
 url: https://manuelw.shinyapps.io/SE_Statistic_Shiy_App/
-when: 1589835728.18506
+when: 1590265056.10691
 asMultiple: FALSE
 asStatic: FALSE
 ignoredFiles: start_script.R|Bericht/logo_gallery.png|data/aufb_covid_data.R

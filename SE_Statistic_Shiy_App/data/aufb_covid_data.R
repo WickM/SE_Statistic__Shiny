@@ -20,7 +20,7 @@ library(magrittr)
 
 #Daten von google
 dat_google <- readr::read_csv("https://www.gstatic.com/covid19/mobility/Global_Mobility_Report.csv")
-#Google LLC "Google COVID-19 Community Mobility Reports." https://www.google.com/covid19/mobility/ Accessed: <2020-4-22>
+#Google LLC "Google COVID-19 Community Mobility Reports." https://www.google.com/covid19/mobility/ Accessed: <2020-5-23>
 
 countries <- 
   xml2::read_html("https://developers.google.com/public-data/docs/canonical/countries_csv") %>% 
@@ -30,8 +30,8 @@ countries <-
 #Google LLC "Google Developer" https://developers.google.com/public-data/docs/canonical/countries_csv Accessed: <2020-4-22>
 
 #Daten von Apple 
-dat_apple <- readr::read_csv("https://covid19-static.cdn-apple.com/covid19-mobility-data/2006HotfixDev11/v1/en-us/applemobilitytrends-2020-04-20.csv")
-#Apple "Apple Mobility Trends Reports" https://www.apple.com/covid19/mobility Accessed: <2020-4-22>
+dat_apple <- readr::read_csv("https://covid19-static.cdn-apple.com/covid19-mobility-data/2008HotfixDev38/v3/en-us/applemobilitytrends-2020-05-21.csv")
+#Apple "Apple Mobility Trends Reports" https://www.apple.com/covid19/mobility Accessed: <2020-5-23>
 
 ###Aufbereitung Apple ----
 #' Apple Daten sind im wide Format
@@ -47,22 +47,16 @@ dat_apple_wide <-
   dat_apple %>% 
   select(-`2020-01-13`) %>% 
   pivot_longer(data = ., cols = starts_with("2020"), names_to = "date", values_to = "val") %>% 
+  filter(geo_type == "country/region") %>% 
   mutate("val" = round(val -100, digits = 0),
          percent_change_type = str_c(transportation_type, "_percent_change_from_baseline"),
-         name = recode(region, "Macao" = "Macau", "UK" = "United Kingdom", "Republic of Korea" = "South Korea")) %>% 
+         name = recode(region, "Macao" = "Macau", "Republic of Korea" = "South Korea")) %>% 
   select(-region,-transportation_type) %>% 
   left_join(., countries, by="name") %>% 
-  select(country, name,latitude, longitude,geo_type,date, percent_change_type, val)
+  select(-country.x,-country.y, name,latitude, longitude,geo_type,date, percent_change_type, val, -geo_type)
 
-dat_apple_countries <- 
-  dat_apple_wide %>% 
-  filter(geo_type == "country/region") %>% 
-  select(-geo_type)
+dat_apple_countries <- dat_apple_wide
 
-dat_apple_cities <- 
-  dat_apple_wide %>% 
-  filter(geo_type == "city") %>% 
-  select(-country, -latitude, -longitude,-geo_type)
 
 ###Aufbereitung google----
 #' Spalten ins wide format
@@ -81,7 +75,7 @@ dat_google_countries <-
 
 ###save ----
 #save(dat_apple_countries, dat_apple_cities, dat_google_countries, file = "SE_Statistic_Shiy_App/data/aufb_covid_data.RData")
-load("SE_Statistic_Shiy_App/data/aufb_covid_data.RData")
+#load("SE_Statistic_Shiy_App/data/aufb_covid_data.RData")
 
 #Tab spezifische daten
 
@@ -109,7 +103,7 @@ dat_mobil_change$juliandate <-julian(dat_mobil_change$date, origin = as.Date("20
 dat_mobil_change$percent_change_type[dat_mobil_change$percent_change_type == "driving_percent_change_from_baseline"] <- "driving"
 dat_mobil_change$percent_change_type[dat_mobil_change$percent_change_type == "walking_percent_change_from_baseline"] <- "walking"
 dat_mobil_change$percent_change_type[dat_mobil_change$percent_change_type == "residential_percent_change_from_baseline"] <- "stay at home"
-colnames(dat_mobil_change)[7] <- "Movement_type"
+colnames(dat_mobil_change)[6] <- "Movement_type"
 
 save(dat_mobil_change_tab_markdown, dat_mobil_change_tab_plot, dat_mobil_change, file = "SE_Statistic_Shiy_App/data/aufb_covid_data_shiny.RData")
 

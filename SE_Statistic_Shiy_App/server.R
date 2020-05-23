@@ -10,11 +10,8 @@ options(stringsAsFactors = FALSE)
 renv::restore()
 
 # Snapshot ist notwendig wenn librarys hinzugefügt wurden damit wir alle genau die gleichen verwenden
-# renv::snapshot()
+#renv::snapshot()
 
-
-# Leaflet Library
-library(leaflet)
 
 # Server Library
 library(shiny)
@@ -35,7 +32,7 @@ shinyServer(function(input, output) {
   filtered_data <- reactive({
     dat_mobil_change %>% 
       dplyr::filter(Movement_type == "walking" | Movement_type == "driving" | Movement_type == "stay at home") %>% 
-      dplyr::filter(name == input$t1_country, dataset == input$t1_dataset)
+      dplyr::filter(name == input$t1_country, dataset %in% input$t1_dataset)
   })
 
   plot <- reactive({
@@ -55,11 +52,11 @@ shinyServer(function(input, output) {
   output$t1_table <- renderTable(filtered_data() %>%
     group_by(Movement_type) %>%
     summarise(
-      "Mean" = mean(val),
-      "Median" = median(val),
-      "STDEV" = sd(val),
-      "Min" = min(val),
-      "Max" = max(val)
+      "Mean" = mean(val, na.rm = TRUE),
+      "Median" = median(val, na.rm = TRUE),
+      "STDEV" = sd(val, na.rm = TRUE),
+      "Min" = min(val, na.rm = TRUE),
+      "Max" = max(val, na.rm = TRUE)
     ))
 
   #Tab 2 Leaflet ##########    
