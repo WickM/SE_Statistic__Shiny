@@ -11,23 +11,20 @@
   </head>
   <body>
     <textarea id="source">
-class: center, middle, inverse, title-slide
 
-# Shiny
-## Se Statistic
-### Flo
-### Rudi
-### Manuel
-### 2020-05-23
+class: inverse, center, middle, hide-logo
+
+
+
+
+
+#R Shiny  
+&lt;img src="img/Shiny.png" width="300"&gt;
+####Statistics, Visualization and More Using "R"
+by Florian Feik, Rudi Reiner, Manuel Wick-Eckl
 
 ---
-
-
-
-
-
 class: inverse, center
-
 ### Agenda
 
 - Introduction
@@ -83,6 +80,7 @@ No HTML, CSS or Javascript knowledge is needed but, HTML and CSS based web pages
 - https://community.rstudio.com/t/shiny-contest-winners-2019-full-list/36347
 
 ---
+class: hide-logo
 ### Our shiny app
 
 Shiny apps can be embedded in RMardown (as app or via the url)
@@ -195,6 +193,7 @@ https://www.shinyapps.io/
 class: inverse, center, middle
 #3. Layout  
 ---
+class: hide-logo
 ### Common Layout Options
 
 
@@ -230,20 +229,20 @@ verticalLayout("Object 1", "Object 2", "Object 3")
 ```
 ]
 ---
+class: hide-logo
 ### HTML Tags
 
 110 HTML tags can be used with builder functions in RShiny
 
 
 ```undefined
-Link:           &lt;a href="url"&gt;link text&lt;/a&gt;  a("link text", href="url")
-Image:          &lt;img src="image.jpg"&gt;        img(src="image.png")
 Linebreak:      &lt;br&gt;                         br()
 Horizontal Line:&lt;hr&gt;                         hr()
 Bold:           &lt;strong&gt;bold text&lt;/strong&gt;   strong("bold text")
 Italic:         &lt;em&gt;italic text&lt;/em&gt;         em("italic text")
 Lvl. 1 Header:  &lt;h1&gt;header&lt;/h1&gt;              h1("header")
-Lvl. 2 Header:  &lt;h2&gt;header&lt;/h2&gt;              h2("header")
+Link:           &lt;a href="url"&gt;link text&lt;/a&gt;  a("link text", href="url")
+Image:          &lt;img src="image.jpg"&gt;        img(src="image.png")
 ```
 
 
@@ -263,13 +262,12 @@ CSS and JavaScript files can be linked.
   2. Create tabs called `Plot`, `Leaflet` and `Markdown`:
   3. Create a sidebar layout in the `Plot` tab:
   4. Insert the string `"This is the main panel"` in the main panel.
-  5. Insert a picture of the SARS-CoV-2 virus into the side bar panel.
-    - Use a builder function with the link provided in the `CoronaVirusImageLink` variable.
-    - Set the image width to `100%`
+  4. Insert the string `"This is the side bar panel"` in the side bar panel.
     
-    **Bonus**: If you have time, use the `HTML()` function replace the text in the main panel with the picture.
+**Bonus**: If you have time, insert a picture of the SARS-CoV-2 virus into the side bar panel instead of the text.
+Use a builder function with the link provided in the `CoronaVirusImageLink` variable.
 
-    ![SARS-CoV-2](https://upload.wikimedia.org/wikipedia/commons/8/82/SARS-CoV-2_without_background.png "SARS-CoV-2")
+![SARS-CoV-2](https://upload.wikimedia.org/wikipedia/commons/8/82/SARS-CoV-2_without_background.png "SARS-CoV-2")
 ---
 class: inverse, center, middle
 #4. Shiny Input
@@ -304,11 +302,11 @@ Examples:
   1. Input for selection of the countries provided
   2. Checkbox input choosing between `"Apple"` and/or `"Google"` data
   3. Text input for the title
-+ Add the text processing with `renderText()` to the server function
++ Add the text processing for the title with `renderText()` to the server function
 + Display all 3 elements stored in the output object by the server in the main panel
   1. Format the text as a header
   2. Display the table
-  3. Display the plot
+  3. Display the plotly plot
 ---
 
 class: inverse, center, middle
@@ -319,13 +317,13 @@ class: inverse, center, middle
 ---
 
 ###Reactivity makes Shiny responisive to User Input. 
--Server Function is "listening" for **Reactive Sources**
+-Server Function is "listening" for **Reactive Sources**  
 
 -Server sends Information to **Reactive Endpoint**  
 
-https://shiny.rstudio.com/gallery/widget-gallery.html 
 
-&lt;img src="img/reactivity1.png" width="709" /&gt;
+&lt;img src="img/reactivity1.png" width="900"&gt;  
+
 ---
 ###Reactive sources
 Reactive Input/ Reactive Values  
@@ -360,14 +358,14 @@ server &lt;- function(input, output) {
 ```
 
 ---
-###Reactive Enviroment
-Reactive input can only be processed in an "reactive Enviroment"
+###Reactive Environment
+Reactive input can only be processed in an "reactive Environment"
 
-**Input is not in an reactive Enviroment**
+**Input is not in an reactive Environment**
 
 ```r
 server &lt;- function(input, output) {
-  # Not an reactive Enviroment
+  # Not an reactive Environment
   # Will couse an ERROR
 * input      &lt;- input$n
   output$nthValue &lt;- input
@@ -375,7 +373,7 @@ server &lt;- function(input, output) {
 ```
 
 --
-**Input is in an reactive Enviroment**
+**Input is in an reactive Environment**
 
 ```r
 server &lt;- function(input, output) {
@@ -384,6 +382,7 @@ server &lt;- function(input, output) {
 ```
 
 ---
+class: hide-logo
 ###reactive expressions
 
 **reactive()**  
@@ -417,7 +416,7 @@ value &lt;- eventReactive(input$num1, {
 -takes a `input` value and Returns a  new value  
 -Can react to different Sources  
 -Is smart, only recalculates after input source has changed  
--**call reactive expressions only in an reactive enviroment**  
+-**call reactive expressions only in an reactive environment**  
 
 
 ```r
@@ -431,6 +430,8 @@ value2 &lt;- reactive({
 })
 ```
 ---
+class: hide-logo
+
 ###observers
 
 **observe()**  
@@ -458,22 +459,27 @@ observeEvent(input$num1, {
   output$nthValue &lt;- renderText({ as.character(value) })
 })
 ```
----
-###Code Example in RStudio
 
 ---
 ###Task4 Reactivity
 **Fill in the missing R Shiny Code**
-1. finish the missing reactive functions
+1. finish the missing reactive functions  
+filtered_data() and plot() 
+
+2. fill in the finished functions where they belong  
   
-2. fill in the reactive Sources  
+2. fill in the missing reactive Sources  
   
-3.fill in the missing reactive Endpoints
+3. fill in the missing reactive Endpoints
 
 ---
-class: inverse, center, middle
-#7. Abschluss
----
+class: center, middle
+
+#Thank You
+
+###Questions ?  
+###Our APP:  
+https://manuelw.shinyapps.io/SE_Statistic_Shiy_App
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
@@ -565,6 +571,33 @@ if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
   }
   preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
 })(document);</script>
+<style>
+.logo {
+  background-image: url(img/shiny.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+  position: absolute;
+  bottom: 1em;
+  left: 1em;
+  width: 110px;
+  height: 128px;
+  z-index: 0;
+}
+</style>
+
+<script>
+document
+  .querySelectorAll(
+    '.remark-slide-content' +
+    ':not(.title-slide)' +
+    // add additional classes to exclude here, e.g.
+    //':not(.inverse)' +
+    ':not(.hide-logo)'
+  )
+  .forEach(el => {
+    el.innerHTML += '<div class="logo"></div>';
+  });
+</script>
 
 <script>
 slideshow._releaseMath = function(el) {

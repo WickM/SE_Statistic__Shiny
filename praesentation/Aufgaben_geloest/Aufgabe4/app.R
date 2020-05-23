@@ -50,7 +50,7 @@ ui <- navbarPage("SE Statistic Shiny APP",
 server <- function(input, output) {
   output$text <- renderText(input$text)
 
-  ## Reactive Datafilter
+  ## Reactive Function Datafilter
   filtered_data <- reactive({
     dplyr::filter(
       subset(dat_mobil_change, Movement_type == "walking" | Movement_type == "driving" | Movement_type == "stay at home"),
@@ -58,7 +58,7 @@ server <- function(input, output) {
     )
   })
   
-  #Reactive Plot
+  #Reactive Function Plot
   plot <- reactive({
     ggplot(filtered_data(), aes(juliandate, val), col = Movement_type) +
       geom_jitter(alpha = 0.6, aes(color = Movement_type)) +

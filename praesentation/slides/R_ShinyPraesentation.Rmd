@@ -9,13 +9,17 @@ date: '`r Sys.Date()`'
 output:
   xaringan::moon_reader:
     lib_dir: libs
+    seal: false
     css: xaringan-themer.css
+    includes:
+      after_body: insert-logo.html
     nature:
       highlightStyle: github
       highlightLines: true
       countIncrementalSlides: false
       beforeInit: "https://platform.twitter.com/widgets.js"
 ---
+class: inverse, center, middle, hide-logo
 
 ```{r setup, include=FALSE}
 options(htmltools.dir.version = FALSE)
@@ -27,8 +31,14 @@ xaringanthemer::style_duo(
   secondary_color =  "#F2A341"
 )
 ```
-class: inverse, center
 
+#R Shiny  
+<img src="img/Shiny.png" width="300">
+####Statistics, Visualization and More Using "R"
+by Florian Feik, Rudi Reiner, Manuel Wick-Eckl
+
+---
+class: inverse, center
 ### Agenda
 
 - Introduction
@@ -83,6 +93,7 @@ No HTML, CSS or Javascript knowledge is needed but, HTML and CSS based web pages
 - https://community.rstudio.com/t/shiny-contest-winners-2019-full-list/36347
 
 ---
+class: hide-logo
 ### Our shiny app
 
 Shiny apps can be embedded in RMardown (as app or via the url)
@@ -191,6 +202,7 @@ https://www.shinyapps.io/
 class: inverse, center, middle
 #3. Layout  
 ---
+class: hide-logo
 ### Common Layout Options
 
 
@@ -225,6 +237,7 @@ verticalLayout("Object 1", "Object 2", "Object 3")
 ```
 ]
 ---
+class: hide-logo
 ### HTML Tags
 
 110 HTML tags can be used with builder functions in RShiny
@@ -310,15 +323,13 @@ class: inverse, center, middle
 ---
 
 ###Reactivity makes Shiny responisive to User Input. 
--Server Function is "listening" for **Reactive Sources**
+-Server Function is "listening" for **Reactive Sources**  
 
 -Server sends Information to **Reactive Endpoint**  
 
-https://shiny.rstudio.com/gallery/widget-gallery.html 
 
-```{r echo=FALSE}
-knitr::include_graphics("img/reactivity1.png")
-```
+<img src="img/reactivity1.png" width="900">  
+
 ---
 ###Reactive sources
 Reactive Input/ Reactive Values  
@@ -352,13 +363,13 @@ server <- function(input, output) {
 ```
 
 ---
-###Reactive Enviroment
-Reactive input can only be processed in an "reactive Enviroment"
+###Reactive Environment
+Reactive input can only be processed in an "reactive Environment"
 
-**Input is not in an reactive Enviroment**
+**Input is not in an reactive Environment**
 ```{r}
 server <- function(input, output) {
-  # Not an reactive Enviroment
+  # Not an reactive Environment
   # Will couse an ERROR
   input      <- input$n #<<
   output$nthValue <- input
@@ -366,7 +377,7 @@ server <- function(input, output) {
 ```
 
 --
-**Input is in an reactive Enviroment**
+**Input is in an reactive Environment**
 ```{r}
 server <- function(input, output) {
   output$nthValue <- renderText({ as.character(input$n) }) #<<
@@ -374,6 +385,7 @@ server <- function(input, output) {
 ```
 
 ---
+class: hide-logo
 ###reactive expressions
 
 **reactive()**  
@@ -405,7 +417,7 @@ value <- eventReactive(input$num1, {
 -takes a `input` value and Returns a  new value  
 -Can react to different Sources  
 -Is smart, only recalculates after input source has changed  
--**call reactive expressions only in an reactive enviroment**  
+-**call reactive expressions only in an reactive environment**  
 
 ```{r}
 #reactive()
@@ -418,6 +430,8 @@ value2 <- reactive({
 })
 ```
 ---
+class: hide-logo
+
 ###observers
 
 **observe()**  
@@ -443,21 +457,28 @@ observeEvent(input$num1, {
   output$nthValue <- renderText({ as.character(value) })
 })
 ```
----
-###Code Example in RStudio
 
 ---
 ###Task4 Reactivity
 **Fill in the missing R Shiny Code**
-1. finish the missing reactive functions
+1. finish the missing reactive functions  
+filtered_data() and plot() 
+
+2. fill in the finished functions where they belong  
   
-2. fill in the reactive Sources  
+2. fill in the missing reactive Sources  
   
-3.fill in the missing reactive Endpoints
+3. fill in the missing reactive Endpoints
 
 ---
-class: inverse, center, middle
-#7. Abschluss
----
+class: center, middle
+
+#Thank You
+
+###Questions ?  
+###Our APP:  
+https://manuelw.shinyapps.io/SE_Statistic_Shiy_App
+
+
 
 
