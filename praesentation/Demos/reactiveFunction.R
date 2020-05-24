@@ -2,7 +2,7 @@ library(shiny)
 
 
 ui <- fluidPage(
-  titlePanel("Output Demo 1"),
+  titlePanel("Reactiv Function Demo"),
   
   sidebarLayout(
     sidebarPanel(
@@ -48,23 +48,23 @@ ui <- fluidPage(
 
 server <- function(input, output) {
   
-  #REactive Function
+  #Reactive Function
   #A Reactive Function returns a value
   sum_reactive <- reactive({
     if (input$react) {
-    value <- sum(input$numbers1, input$numbers2, input$numbers3)
-    return(value)
+      value <- sum(input$numbers1, input$numbers2, input$numbers3)
+      return(value)
     }
-    })
+  })
   output$sum1 <- renderText(as.character(sum_reactive() ))
 
   #Observe Function
-  #A Observe Function daesn't return a value. 
+  #An Observe Function doesn't return a value. 
   #It's beeing used for side effects
   observe({
     if (input$obs) {
-    value <- sum(input$numbers1, input$numbers2, input$numbers3)
-    output$sum2 <- renderText(as.character(value))
+      value <- sum(input$numbers1, input$numbers2, input$numbers3)
+      output$sum2 <- renderText(as.character(value))
     }
   })
 
@@ -74,8 +74,8 @@ server <- function(input, output) {
   #"Listens" only to one input 
   sum_reactiveEvent <- eventReactive(input$eventreact, {
     if (input$eventreact) {
-    value <- sum(input$numbers1, input$numbers2, input$numbers3)
-    return(value)
+      value <- sum(input$numbers1, input$numbers2, input$numbers3)
+      return(value)
     }
   })
   output$sum3 <- renderText(as.character(sum_reactiveEvent() ))

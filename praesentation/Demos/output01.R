@@ -5,7 +5,7 @@ strReverse <- function(x)
 
 
 ui <- fluidPage(
-  titlePanel("Output Demo 1"),
+  titlePanel("Output Demo"),
   
   sidebarLayout(
     sidebarPanel(
