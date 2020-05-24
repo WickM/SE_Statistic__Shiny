@@ -6,7 +6,7 @@
     <meta name="author" content="Flo" />
     <meta name="author" content="Rudi" />
     <meta name="author" content="Manuel" />
-    <meta name="date" content="2020-05-23" />
+    <meta name="date" content="2020-05-24" />
     <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
   </head>
   <body>
@@ -19,20 +19,21 @@ class: inverse, center, middle, hide-logo
 
 
 #R Shiny  
-&lt;img src="img/Shiny.png" width="300"&gt;
+&lt;img src="img/shiny.png" width="300"&gt;
 ####Statistics, Visualization and More Using "R"
 by Florian Feik, Rudi Reiner, Manuel Wick-Eckl
 
 ---
-class: inverse, center
+class: inverse,
 ### Agenda
 
-- Introduction
-- Components of a shiny app
-- Layouts
-- Input and Output
-- Reactive/Render functions in shiny
-- Our shiny app
+1. Introduction
+2. Components of a shiny app
+3. Layouts
+4. Input
+5. Output
+6. Reactive/Render functions in shiny
+7. Conclusion/Our shiny app
 
 ---
 ### Procedure
@@ -55,8 +56,11 @@ class: inverse, center
 - The sum of the 4 excercises results in this app
 
 - Show the extended version of our app
-
 ---
+class: inverse, center, middle
+#1. Introduction
+---
+class: hide-logo
 ### What is shiny?
 
 The shiny package (initialy released in 2014) allows to "easily" build interactive web apps or dashboards from R
@@ -64,7 +68,6 @@ The shiny package (initialy released in 2014) allows to "easily" build interacti
 They can act as standalone web pages, or elemtens, created with shiny can be included in reports
 
 No HTML, CSS or Javascript knowledge is needed but, HTML and CSS based web pages can be integrated in R
----
 ### Sources
 
 **Tutorials**
@@ -78,6 +81,35 @@ No HTML, CSS or Javascript knowledge is needed but, HTML and CSS based web pages
  **Shiny contest**
  
 - https://community.rstudio.com/t/shiny-contest-winners-2019-full-list/36347
+
+Winner of category "most fun"
+
+- https://dreamrs.shinyapps.io/memory-hex/
+---
+class: hide-logo
+##Dataset for our project - back to Covid-19
+- Change in movement for differnt types since Covid-19
+- Different countries
+- Data from different sources  
+  https://www.google.com/covid19/mobility/ and https://www.apple.com/covid19/mobility  
+
+
+```
+##   dataset alternative_name sub-region       date val Movement_type    name
+## 1   Apple             &lt;NA&gt;       &lt;NA&gt; 2020-01-14  -5       driving Albania
+## 2   Apple             &lt;NA&gt;       &lt;NA&gt; 2020-01-15   1       driving Albania
+## 3   Apple             &lt;NA&gt;       &lt;NA&gt; 2020-01-16  -3       driving Albania
+## 4   Apple             &lt;NA&gt;       &lt;NA&gt; 2020-01-17   4       driving Albania
+## 5   Apple             &lt;NA&gt;       &lt;NA&gt; 2020-01-18  13       driving Albania
+## 6   Apple             &lt;NA&gt;       &lt;NA&gt; 2020-01-19   5       driving Albania
+##   latitude longitude country sub_region_1 juliandate
+## 1 41.15333  20.16833    &lt;NA&gt;         &lt;NA&gt;         13
+## 2 41.15333  20.16833    &lt;NA&gt;         &lt;NA&gt;         14
+## 3 41.15333  20.16833    &lt;NA&gt;         &lt;NA&gt;         15
+## 4 41.15333  20.16833    &lt;NA&gt;         &lt;NA&gt;         16
+## 5 41.15333  20.16833    &lt;NA&gt;         &lt;NA&gt;         17
+## 6 41.15333  20.16833    &lt;NA&gt;         &lt;NA&gt;         18
+```
 
 ---
 class: hide-logo
@@ -94,6 +126,9 @@ knitr::include_app("https://manuelw.shinyapps.io/SE_Statistic_Shiy_App/",
 
 &lt;iframe src="https://manuelw.shinyapps.io/SE_Statistic_Shiy_App/?showcase=0" width="100%" height="600px"&gt;&lt;/iframe&gt;
 ---
+class: inverse, center, middle
+#2. How to start?
+---
 ### Installing shiny and starting shiny project
 
 Installation as usual
@@ -106,7 +141,7 @@ Installation as usual
 
 "New Shiny Web app"
 ---
-### Structure an components of a Shiny App (1/3)
+### Structure and components of a Shiny App (1/3)
 
 Shiny apps have three components
 
@@ -117,7 +152,6 @@ Shiny apps have three components
 The ui object and the server function can be together in one `app.R` (single-file app)
 or in seperate `ui.R` and `server.R` scripts
 ---
-
 ### Single-file app
 
 
